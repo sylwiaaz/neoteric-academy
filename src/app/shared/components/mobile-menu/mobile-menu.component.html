@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'over'" [opened]="false" position="end">
+    <mat-toolbar class="mobile-toolbar"><span class="header-logo">Menu</span>
+      <button type="button" class="btn-toggle-nav" aria-label="Toggle sidenav" mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+      </button></mat-toolbar>
+    <mat-nav-list class="nav-list mobile-menu">
+      <a class="sidenav-list-item sign-as-Dev" href="#">
+        <div class="icon-outline">
+          <mat-icon aria-label="">face</mat-icon>
+        </div>
+        Sign in as Developer
+      </a>
+      <a class="sidenav-list-item active" href="#">
+        <mat-icon aria-label="">work_outline</mat-icon>
+        Job offers
+      </a>
+      <a class="sidenav-list-item" href="#">
+        <mat-icon aria-label="">business</mat-icon> Brand stories
+      </a>
+      <a class="sidenav-list-item" href="#">
+        <mat-icon aria-label="">menu_book</mat-icon>Just Geek IT
+      </a>
+      <a class="sidenav-list-item" href="#">
+        <mat-icon aria-label="">people</mat-icon> Matchmaking
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="header-container">
+      <div class="header-mobile">
+        <div class="header-logo">justjoin.it</div>
+        <button class="btn-toggle-nav" type="button" aria-label="Toggle sidenav" mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </div>
+      <div class="sign-btns">
+        <!--<a [routerLink]="appRouterUrls.LOGIN" class="sign-in">Sign in</a>-->
+        <a class="mobile-register btn-rounded">Register</a>
+        <a class="mobile-sign btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
+      </div>
+    </div>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <div> Hello world.</div> -->
