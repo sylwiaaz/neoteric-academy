@@ -1,0 +1,144 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: white;
+  color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  justify-content: space-between;
+
+  .header-logo {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  .list-item {
+    font-size: 15px;
+    line-height: 24px;
+    color: #99a1ab;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 14px;
+  }
+
+  .list-item:hover {
+    color: #f48fb1;
+  }
+
+  .list-item.active {
+    color: #ff4081;
+  }
+
+  .mat-icon {
+    margin-right: 10px;
+  }
+
+}
+
+
+.menu-btns {
+  margin-left: auto;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-self: stretch;
+
+  a.btn-rounded {
+    background-color: #ff4081;
+    color: #fff;
+    box-shadow: none;
+    text-transform: none;
+    font-weight: 600;
+    line-height: 42px;
+    font-size: 14px;
+    height: 42px;
+    padding: 0 22px;
+    transition: .3s ease-out;
+  }
+
+  a.sign-in {
+    background-color: #9c27b0;
+    margin-left: 12px;
+  }
+
+  a:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  }
+
+}
+
+.sidenav-logo {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.sidenav-logo::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 1.5px;
+  background-color: rgb(224, 224, 224);
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.btn-toggle-nav {
+  color: #99a1ab;
+  //  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.btn-toggle-nav:hover {
+  box-shadow: none;
+  color: #f48fb1;
+}
+
+.sidenav-list {
+
+  .sidenav-list-item {
+    font-size: 15px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 56px;
+    height: 56px;
+    padding: 0 32px;
+    font-weight: 500;
+  }
+
+  .sidenav-list-item:hover {
+    color: #37474f;
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  .mat-icon {
+    margin-right: 32px;
+    color: rgba(0, 0, 0, 0.54);
+
+  }
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
