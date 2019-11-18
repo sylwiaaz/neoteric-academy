@@ -1,0 +1,24 @@
+.filters {
+  height: 125px;
+  background-color: rgb(58, 58, 58);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px;
+
+  .filters-lang,
+  .filters-place {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}
+
+button {
+  border-radius: 20px;
+  padding: 10px;
+  border: none;
+}
