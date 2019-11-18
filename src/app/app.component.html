@@ -1,3 +1,6 @@
-<app-navigation-menu></app-navigation-menu>
+<app-navigation-menu *ngIf="isDesktopWidth">
+  <app-filters></app-filters>
+</app-navigation-menu>
+<app-mobile-menu *ngIf="!isDesktopWidth">
+</app-mobile-menu>
 <router-outlet></router-outlet>
-
