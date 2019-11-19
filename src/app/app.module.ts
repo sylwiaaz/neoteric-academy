@@ -7,17 +7,20 @@ import { MaterialModule } from './material/material.module';
 import { CoreGuards } from './guards';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './views/auth/auth.module';
+import { BrandsModule } from './views/brands/brands.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     SharedModule,
-    AuthModule
+    AuthModule,
+    BrandsModule
   ],
   providers: [
     CoreGuards
