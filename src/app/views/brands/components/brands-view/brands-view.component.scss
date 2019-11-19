@@ -1,0 +1,53 @@
+.filters-brands {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-icon {
+  vertical-align: middle;
+  font-size: 19px;
+}
+
+.brand {
+  color: #fff;
+  &:nth-of-type(1).active {
+    background: linear-gradient(to right, #ba68c8, #9c27b0);
+  }
+  &:nth-of-type(2) {
+    background: linear-gradient(-90deg, #ef5350, #e53935);
+  }
+
+  &:nth-of-type(3) {
+    background: linear-gradient(-90deg, #e8c750, #f7981c);
+  }
+
+  &:nth-of-type(4) {
+    background: linear-gradient(-90deg, #20e7dd, #00c7b4);
+  }
+
+  &:nth-of-type(5) {
+    background: linear-gradient(-90deg, #00abea, #119fd2);
+  }
+
+  &:nth-of-type(6) {
+    background: linear-gradient(-90deg, #ec4cb6, #d44bd5);
+  }
+
+  &:hover {
+    &:nth-of-type(2) {
+      background: #e2231e;
+    }
+    &:nth-of-type(3) {
+      background: #f18c08;
+    }
+    &:nth-of-type(4) {
+      background: #00ae9d;
+    }
+    &:nth-of-type(5) {
+      background: #0f8dba;
+    }
+    &:nth-of-type(6) {
+      background: #cf36d0;
+    }
+  }
+}
