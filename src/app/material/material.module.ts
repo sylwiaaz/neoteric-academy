@@ -4,7 +4,7 @@ import { MatSliderModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // in this module we import every angular material module
 @NgModule({
   imports: [
@@ -13,14 +13,16 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatSliderModule,
     MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
     MatListModule,
-    LayoutModule
+    LayoutModule,
+    MatSlideToggleModule
   ],
   exports: [
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
     MatListModule,
-    LayoutModule
-  ]
+    LayoutModule,
+    MatSlideToggleModule
+   ]
 })
 export class MaterialModule { }
