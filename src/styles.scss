@@ -1,22 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-@import 'styles/_overrides';
-@import 'styles/_variables';
+@import "styles/_overrides";
+@import "styles/_variables";
 
-*, *::after, *::before {
- box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
   margin: 0;
-  overflow-x: hidden;
-  font-family: Roboto, sans-serif;
+}
+
+html>body {
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    color: #37474f;
+    background-color: #f3f6f8;
+    height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+// body {
+//   margin: 0;
+//   overflow-x: hidden;
+//   font-family: Roboto, sans-serif;
+// }
+app-root {
+  height: 100vh;
 }
 
 a,
@@ -27,9 +40,82 @@ button {
 ul {
   list-style: none;
 
-
   a {
     text-decoration: none;
     color: black;
   }
+}
+
+.night-switch {
+  color: #9e9e9e;
+  .night-toggle {
+    vertical-align: middle;
+  }
+  .mat-icon {
+    font-size: 22px;
+    vertical-align: middle;
+    transform: rotate(180deg);
+  }
+
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #9e9e9e;
+  }
+
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #fafafa;
+  }
+
+  .mat-slide-toggle .mat-slide-toggle-ripple {
+    display: none;
+    height: 0px;
+    width: 0px;
+  }
+}
+
+.filter-btn {
+  background-color: #fff;
+  color: #777;
+  box-shadow: none;
+  text-transform: none;
+  margin-right: 15px;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 12px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  vertical-align: middle;
+  border: none;
+  letter-spacing: .5px;
+  cursor: pointer;
+}
+.filter-btn:hover {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.filter-btn.more {
+  position:relative;
+  background-color: transparent;
+  cursor: pointer;
+
+  .mat-icon {
+    vertical-align: middle;
+    color: #37474f;
+  }
+}
+
+.filter-btn.more:hover {
+  box-shadow: none;
+}
+
+
+.waves-effect {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+  z-index: 1;
+  transition: .3s ease-out;
 }
