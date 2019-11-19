@@ -6,13 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
-  langs = ['All', 'JS', 'Java', 'HTML', 'PHP', 'Ruby', 'Python', 'DevOps', '.Net', 'C++', 'Scala', 'Mobile', 'Testing', '...'];
+  onShow = false;
+  selectedPlace = 'All';
+  langs = ['All', 'JS', 'Java', 'HTML', 'PHP', 'Ruby', 'Python', 'DevOps', '.Net', 'C++', 'Scala', 'Mobile', 'Testing'];
 
-  places = ['All', 'Warszawa', 'Kraków', 'Trójmiasto', 'Poznań', 'Remote', '...'];
+  places = ['All', 'Warszawa', 'Kraków', 'Wrocław', 'Poznań', 'Trójmiasto', 'Remote', 'World'];
+  otherPlaces = ['Białystok', 'Bielsko-Biała', 'Bydgoszcz', 'Częstochowa', 'Gliwice', 'Katowice', 'Kielce', 'Lublin', 'Łódź', 'Olsztyn', 'Opole', 'Toruń', 'Rzeszów', 'Szczecin'];
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
-
 }
