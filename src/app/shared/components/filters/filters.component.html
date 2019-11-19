@@ -1,10 +1,32 @@
 <div class="filters">
   <div class="filters-place">
-    <button *ngFor="let place of places" class="btn-place"> {{ place }}</button>
-
+    <div
+      *ngFor="let place of places"
+      class="filter-btn waves-effect"
+      [ngClass]="{ active: place === selectedPlace }"
+      (click)="selectedPlace = place"
+    > {{ place }}
   </div>
-  <div class="filters-lang">
-    <button *ngFor="let language of langs" class="btn-lang"> {{ language }} </button>
+    <div class="filter-btn more wave-effect" (click)="onShow = !onShow">
+      <mat-icon>more_horiz</mat-icon>
+      <div class="other-options" [ngClass]="{ show: onShow }">
+        <option class="other-place" *ngFor="let otherOption of otherPlaces"
+          >{{ otherOption }}
+        </option>
+      </div>
+    </div>
+    <div class="night-switch">
+      <div class="switch">
+        <mat-icon>wb_sunny</mat-icon>
+        <mat-slide-toggle class="night-toggle"></mat-slide-toggle>
+        <mat-icon> brightness_3</mat-icon>
+      </div>
+    </div>
   </div>
-
+  <!-- <div class="filters-lang">
+    <button *ngFor="let language of langs" class="btn-lang">
+      {{ language }}
+    </button>
+  </div> -->
+  <ng-content></ng-content>
 </div>
