@@ -1,24 +1,65 @@
 .filters {
   height: 125px;
-  background-color: rgb(58, 58, 58);
+  background-color: #f3f6f8;
   max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 0 20px;
+  padding: 12px 40px 0 18px;
 
   .filters-lang,
   .filters-place {
-    width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
+  .filters-place {
+    margin-bottom: 15px;
+  }
 
+  .filter-btn.active {
+    color: #fff;
+    background: linear-gradient(to right, #ba68c8, #9c27b0);
+  }
 }
 
-button {
-  border-radius: 20px;
-  padding: 10px;
-  border: none;
+.night-switch {
+  margin-left: auto;
+  .mat-icon {
+    margin: 0 10px;
+  }
+}
+
+.other-options {
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  justify-content: center;
+  z-index: 100;
+  margin: 5px 0 0 0;
+  border-radius: 5px;
+  max-height: 0;
+  background-color: #fff;
+  color: #37474f;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.other-options.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, max-height 0.8s;
+  max-height: 500px;
+}
+
+.other-place {
+  padding: 7px 24px;
+  text-align: center;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.other-place:hover {
+  background-color: #f3f6f8;
 }
