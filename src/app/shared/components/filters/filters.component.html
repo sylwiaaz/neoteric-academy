@@ -1,17 +1,17 @@
 <div class="filters">
   <div class="filters-place">
     <div
-      *ngFor="let place of places"
-      class="filter-btn waves-effect"
-      [ngClass]="{ active: place === selectedPlace }"
-      (click)="selectedPlace = place"
-    > {{ place }}
-  </div>
+    *ngFor="let place of places"
+    class="filter-btn waves-effect"
+    [ngClass]="{ active: place === selectedPlace }"
+      (click)="selectedPlace = place">
+      {{ place }}
+    </div>
     <div class="filter-btn more wave-effect" (click)="onShow = !onShow">
       <mat-icon>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
-        <option class="other-place" *ngFor="let otherOption of otherPlaces"
-          >{{ otherOption }}
+        <option class="other-option" *ngFor="let otherOption of otherPlaces">
+          {{ otherOption }}
         </option>
       </div>
     </div>
@@ -23,10 +23,5 @@
       </div>
     </div>
   </div>
-  <!-- <div class="filters-lang">
-    <button *ngFor="let language of langs" class="btn-lang">
-      {{ language }}
-    </button>
-  </div> -->
   <ng-content></ng-content>
 </div>
