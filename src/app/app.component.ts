@@ -1,4 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { ResizeService } from './shared/services/resize.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -6,23 +9,27 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
-  innerWidth: any;
-  isDesktopWidth: boolean;
-  desktopWidthView = 1024;
+export class AppComponent implements OnInit, OnDestroy {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event?) {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth >= this.desktopWidthView) {
-      this.isDesktopWidth = true;
-    } else {
-      this.isDesktopWidth = false;
-    }
-    // console.log(this.innerWidth);
-    // console.log(this.isDesktopWidth);
+  public isDesktopWidth = window.innerWidth > 1024 ? true : false;
+  private resizeSubscription: Subscription;
+
+  constructor(private resizeService: ResizeService) {  }
+
+  ngOnInit() {
+    this.resizeSubscription = this.resizeService.onResize$
+    .subscribe(size => {
+      if (size.innerWidth > 1024) {
+        this.isDesktopWidth = true;
+      } else {
+        this.isDesktopWidth = false;
+      }
+    });
   }
-  constructor() {
-    this.onResize();
+
+  ngOnDestroy() {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 }
