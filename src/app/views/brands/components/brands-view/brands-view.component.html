@@ -1,7 +1,21 @@
-<div class="filters-brands">
-  <div class="filter-btn wave-effect brand active">All</div>
-   <div *ngFor="let typeBrand of typeBrands" class="filter-btn wave-effect brand">
-    <mat-icon>{{ typeBrand.icon }}</mat-icon>
-    {{ typeBrand.type }}
+<app-filters *ngIf="isDesktopWidth">
+  <div class="filters-brands">
+    <!-- <div class="filter-btn wave-effect brand active">All</div> -->
+    <div *ngFor="let typeBrand of typeBrands" class="filter-btn wave-effect brand" [ngClass]="{
+      active: typeBrand.type === selectedBrand,
+      inactive: typeBrand.type !== selectedBrand && selectedBrand !== 'All'
+    }" (click)="selectedBrand = typeBrand.type">
+      <mat-icon>{{ typeBrand.icon }}</mat-icon>
+      {{ typeBrand.type }}
+    </div>
   </div>
-</div>
+</app-filters>
+
+<app-filters-mobile *ngIf="!isDesktopWidth">
+  <mat-select class="filter-select" [value]=" 'All'">
+    <mat-option *ngFor="let typeBrand of typeBrands; let i = index" [value]="typeBrand.type"
+      (click)="selectedBrand = typeBrand.type">
+      {{ typeBrand.type }}
+    </mat-option>
+  </mat-select>
+</app-filters-mobile>
