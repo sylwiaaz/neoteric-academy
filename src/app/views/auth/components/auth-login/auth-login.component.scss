@@ -1,0 +1,190 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.login {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px 75px;
+  justify-content: center;
+  align-items: center;
+}
+
+.get-started {
+  color: #2E384D;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.sign-with {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  a {
+    flex-basis: 45%;
+    height: 48px;
+    padding: 0 16px;
+    min-width: 48px;
+    border-radius: 24px;
+    line-height: 48px;
+    font-size: 14px;
+    margin: 8px 0;
+    color: rgb(117, 117, 117);
+    font-weight: 400;
+    background-color: #F3F4F6;
+  }
+
+  a:hover {
+    background-color: #d5d5d5;
+  }
+}
+
+.line {
+  height: 2px;
+  text-align: center;
+  background: rgb(231, 233, 239);
+  margin: 20px 0px 36px;
+  width: 90%;
+
+  span {
+    color: rgb(191, 197, 210);
+    font-size: 14px;
+    position: relative;
+    top: -12px;
+    background:white;
+    // background-color:white;
+    padding: 0px 20px;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  /deep/ .mat-form-field-flex {
+    min-width: 35vw;
+  }
+}
+
+form /deep/ .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #ff4081;
+}
+
+.mat-icon {
+  margin-right: 15px;
+}
+
+.submit-btn {
+  margin: 15px auto 36px;
+  width: 280px;
+  // margin-top: 15px;
+  // margin-bottom: 36px;
+  height: 40px;
+  padding: 0 16px;
+  min-width: 40px;
+  border-radius: 20px;
+  color: #fff;
+  background-color: #ff4081;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-weight: 600;
+  line-height: 1.75;
+  box-shadow: none;
+  border: none;
+
+  &:hover {
+    background-color: rgb(178, 44, 90);
+  }
+}
+
+.register {
+  h6 {
+    color: #2E384D;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.link {
+  color: #ff4081;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.link:hover {
+  text-transform: underline;
+}
+
+.line-between {
+  height: 1px;
+  width: 240px;
+  text-align: center;
+  background: rgb(231, 233, 239);
+  margin: 15px 0;
+}
+
+.mat-checkbox {
+  margin: 10px 0;
+  color: rgb(135, 152, 173);
+  font-size: 14px;
+}
+
+.login-img {
+  margin-top: 15px;
+  width: 50%;
+  min-height: 90vh;
+  background-image: url(../../../../../assets/images/software.png);
+  background-repeat: no-repeat;
+}
+
+@media (min-width:850px) and (max-width: 1050px) {
+  .login-img {
+    width: 40%;
+  }
+
+  .login {
+    width: 60%;
+
+    a {
+      flex-basis: 45%;
+      margin: 8px 0;
+    }
+  }
+  .login-form /deep/ .mat-form-field-flex {
+      min-width: 350px;
+    }
+}
+
+@media (max-width: 849px) {
+  .login-img {
+    display: none;
+  }
+
+  .login {
+    width: 100%;
+
+    a {
+      flex-basis: 60%;
+      margin: 8px 0;
+    }
+
+    .line {
+      width: 70%;
+      margin: 20px 10vw 36px;
+    }
+  }
+
+  .login-form /deep/ .mat-form-field-flex {
+    min-width: 60vw;
+  }
+}

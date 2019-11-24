@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services';
+import { AppRouterUrls } from '../../../../app-routing.config';
 
 @Component({
   selector: 'app-auth-login',
@@ -7,5 +8,7 @@ import { AuthService } from '../../services';
   styleUrls: ['./auth-login.component.scss'],
 })
 export class AuthLoginComponent {
-  constructor(private authService: AuthService) {}
+  hide = true;
+  constructor(private authService: AuthService) { }
+
 }

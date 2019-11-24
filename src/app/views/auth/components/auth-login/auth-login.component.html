@@ -1,1 +1,57 @@
-<p>login component</p>
+<div class="container">
+  <div class="login">
+    <h1 class="get-started">Get started for free</h1>
+    <div class="sign-with">
+      <a href="#" class="btn-rounded"> <span>Sign in with Google</span></a>
+      <a href="#" class="btn-rounded"> <span>Sign in with Github</span></a>
+      <a href="#" class="btn-rounded"> <span>Sign in with LinkedIn</span></a>
+      <a href="#" class="btn-rounded"> <span>Sign in with Facebook</span></a>
+    </div>
+    <div class="line">
+      <span> Or </span>
+    </div>
+    <form class="login-form">
+      <div class="form-input">
+        <mat-icon>perm_identity</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" />
+          <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error> -->
+        </mat-form-field>
+      </div>
+      <div class="form-input">
+        <mat-icon>lock</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Enter your password"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+      <button class="submit-btn" type="submit">Sign in</button>
+    </form>
+    <!-- <div class=""> -->
+    <div class="register">
+      <h6>
+        New account? <span><a class="link">Register</a></span>
+      </h6>
+    </div>
+    <div class="line-between"></div>
+    <div class="forgot-password">
+      <a class="link">Forgot password?</a>
+    </div>
+  </div>
+  <div class="login-img">
+    <!-- <img href="../../../../../assets/images/software.png"> -->
+  </div>
+</div>
