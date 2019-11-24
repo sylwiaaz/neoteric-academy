@@ -11,25 +11,20 @@
   margin: 0;
 }
 
-html>body {
+html > body {
   font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
-    font-weight: 400;
-    color: #37474f;
-    background-color: #f3f6f8;
-    height: 100%;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-weight: 400;
+  color: #37474f;
+  background-color: #f3f6f8;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-// body {
-//   margin: 0;
-//   overflow-x: hidden;
-//   font-family: Roboto, sans-serif;
-// }
 app-root {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 a,
@@ -85,7 +80,7 @@ ul {
   border-radius: 20px;
   vertical-align: middle;
   border: none;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   cursor: pointer;
 }
 .filter-btn:hover {
@@ -94,7 +89,7 @@ ul {
 }
 
 .filter-btn.more {
-  position:relative;
+  position: relative;
   background-color: transparent;
   cursor: pointer;
 
@@ -108,7 +103,6 @@ ul {
   box-shadow: none;
 }
 
-
 .waves-effect {
   position: relative;
   cursor: pointer;
@@ -117,5 +111,66 @@ ul {
   user-select: none;
   vertical-align: middle;
   z-index: 1;
-  transition: .3s ease-out;
+  transition: 0.3s ease-out;
+}
+
+.sidenav-container.mat-drawer-container {
+  position: static;
+}
+
+.other-options {
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  justify-content: center;
+  z-index: 100;
+  margin: 5px 0 0 0;
+  border-radius: 5px;
+  max-height: 0;
+  background-color: #fff;
+  color: #37474f;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.other-options.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, max-height 0.8s;
+  max-height: 600px;
+}
+
+.other-option {
+  padding: 7px 24px;
+  text-align: center;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.other-option:hover {
+  background-color: #f3f6f8;
+}
+
+.filter-select {
+  flex-basis: 1;
+  margin: 0 5px;
+  font-size: 18px;
+  border-radius: 3px;
+  appearance: none;
+  height: auto;
+  color: #484848;
+  padding: 14px;
+  border: 0px solid #dce0e0;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.05), 0 1px 5px 0 rgba(0,0,0,0.04);
+  background-color: #fff;
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #37474f;
 }
