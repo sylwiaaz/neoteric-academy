@@ -53,7 +53,6 @@
 
 }
 
-
 .menu-btns {
   margin-left: auto;
   margin-right: 10px;
@@ -127,8 +126,12 @@
   }
 
   .sidenav-list-item:hover {
-    color: #37474f;
     background-color: rgba(0,0,0,0.05);
+    color: #ff4081;
+
+    .mat-icon {
+      color: #ff4081;
+    }
   }
 
   .mat-icon {
@@ -136,9 +139,4 @@
     color: rgba(0, 0, 0, 0.54);
 
   }
-}
-
-.header-logo {
-  font-size: 24px;
-  font-weight: bold;
 }
