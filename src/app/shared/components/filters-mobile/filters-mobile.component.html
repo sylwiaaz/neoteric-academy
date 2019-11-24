@@ -1,0 +1,6 @@
+<div class="filter-bar">
+  <mat-select class="filter-select" [value]="'All'">
+    <mat-option *ngFor="let place of places" [value]="place" (click)="selectedPlace = place"> {{ place }} </mat-option>
+  </mat-select>
+  <ng-content></ng-content>
+</div>
