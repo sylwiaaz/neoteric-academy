@@ -5,6 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Ng5SliderModule } from 'ng5-slider';
+import { MatRippleModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 // in this module we import every angular material module
 @NgModule({
   imports: [
@@ -14,7 +21,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
     MatListModule,
     LayoutModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    Ng5SliderModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -22,7 +35,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
     MatListModule,
     LayoutModule,
-    MatSlideToggleModule
-   ]
+    MatSlideToggleModule,
+    Ng5SliderModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule
+  ]
 })
 export class MaterialModule { }
