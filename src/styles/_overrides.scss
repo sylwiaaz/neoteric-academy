@@ -27,6 +27,10 @@ button:hover {
   padding-top: 0;
 }
 
+.sidenav-container {
+  height: auto !important;
+}
+
 .sidenav-list-item {
   display: flex;
   flex-direction: row;
