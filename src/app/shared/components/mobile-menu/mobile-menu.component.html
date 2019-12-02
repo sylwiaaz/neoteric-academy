@@ -45,13 +45,10 @@
         </button>
       </div>
       <div class="sign-btns">
-        <!--<a [routerLink]="appRouterUrls.LOGIN" class="sign-in">Sign in</a>-->
-        <a class="mobile-register btn-rounded" [routerLink]="appRouterUrls.REGISTER">Register</a>
-        <a class="mobile-sign btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
+        <a matRipple class="mobile-register btn-rounded" [routerLink]="appRouterUrls.REGISTER">Register</a>
+        <a matRipple class="mobile-sign btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
       </div>
     </div>
-    <!-- <app-filters-mobile> -->
     <ng-content></ng-content>
-    <!-- </app-filters-mobile> -->
   </mat-sidenav-content>
 </mat-sidenav-container>
