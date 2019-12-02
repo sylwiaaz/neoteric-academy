@@ -1,0 +1,179 @@
+<div class="offer-detail">
+  <div class="offer-header">
+    <div class="background" [ngClass]="offer.tech">
+      <button class="back waves-effect" [routerLink]="appRouterUrls.DEFAULT">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button class="share waves-effect">
+        <mat-icon>share</mat-icon>
+      </button>
+      <div class="header-row">
+        <div class="logo-circle">
+          <div class="logo-container">
+            <div class="company-name">{{ offer.companyName }}</div>
+          </div>
+        </div>
+        <div class="company-info">
+          <div class="salary">{{ offer.salary }}</div>
+          <div class="job-title">{{ offer.jobTitle }}</div>
+          <div class="address">{{ offer.companyAddress }}</div>
+        </div>
+        <button class="btn-rounded apply-btn waves-effect">
+          <mat-icon> mail</mat-icon>
+          Apply
+        </button>
+      </div>
+    </div>
+    <div class="tiles-row">
+      <div class="tile company-name">
+        <mat-icon>business</mat-icon>
+        <div class="value">
+          {{ offer.companyName }}
+        </div>
+        <div class="title">Company name</div>
+      </div>
+      <div class="tile company-size">
+        <mat-icon> supervisor_account</mat-icon>
+        <div class="value">{{ offer.companySize }}</div>
+        <div class="title">Company size</div>
+      </div>
+      <div class="tile type-emp">
+        <mat-icon>description</mat-icon>
+        <div class="value">{{ offer.employmentType }}</div>
+        <div class="title">EMP. type</div>
+      </div>
+      <div class="tile exp-level">
+        <mat-icon>trending_up</mat-icon>
+        <div class="value">{{ offer.experienceLevel }}</div>
+        <div class="title">EXP. level</div>
+      </div>
+      <div class="tile date">
+        <mat-icon>timelapse</mat-icon>
+        <div class="value">{{ offer.date }}</div>
+        <div class="title">Added</div>
+      </div>
+    </div>
+  </div>
+  <div class="offer-main-content">
+    <div class="offer-section tech-stack">
+      <div class="section-title">
+        Tech stack
+      </div>
+      <div class="section-content"></div>
+    </div>
+    <div class="offer-section description">
+      <div class="section-title">
+        Description
+      </div>
+      <div class="section-content">
+        <div class="main-description">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat
+            a, officiis veniam qui exercitationem cumque impedit quia odit
+            corrupti quae dolorum, at non aspernatur quos, ullam et. Tenetur,
+            natus eaque.
+          </p>
+          <p>
+            Libero soluta iusto corporis obcaecati ipsum quaerat et, non
+            architecto? Exercitationem, nobis reiciendis. Saepe ipsa enim dicta
+            quisquam recusandae quod sequi alias, aliquam autem inventore fugit
+            omnis rerum assumenda laudantium.
+          </p>
+          <p>
+            Veritatis, quae! Ex, consectetur vel. Odit officiis dolore iure non,
+            pariatur tenetur ipsa dolor officia magni voluptatum incidunt
+            consectetur, accusantium nostrum corporis ut obcaecati, asperiores
+            ab repudiandae quo rem eos.
+          </p>
+          <p>
+            Facilis exercitationem, ipsa inventore accusamus possimus
+            cupiditate? Veniam mollitia adipisci ipsum dolorem culpa, optio
+            sapiente inventore, ducimus voluptates minima cumque praesentium
+            laudantium dignissimos qui saepe rerum quibusdam ratione, modi
+            aperiam! Fugiat libero deleniti non, dolorum at laudantium expedita,
+            reiciendis blanditiis odit veritatis consequuntur impedit error
+            dolores voluptatibus porro omnis optio, aliquam nemo corporis
+            temporibus ipsa mollitia.
+          </p>
+          Nobis quasi voluptas mollitia.
+        </div>
+        <div class="clause">
+           <div class="moreClauseInformation" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fuga
+          quisquam exercitationem deserunt quaerat sint in magnam nisi sit,
+          similique harum eos doloremque iusto necessitatibus libero consequatur
+          animi esse quam. <span *ngIf="showMoreClauseInfo"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fuga
+          quisquam exercitationem deserunt quaerat sint in magnam nisi sit,
+          similique harum eos doloremque iusto necessitatibus libero consequatur
+          animi esse quam</span><span class="more" (click)="showMoreClauseInfo = !showMoreClauseInfo">{{ showMoreClauseInfo ? 'less': 'more' }}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-section apply">
+      <div class="section-title">
+        Apply for the job
+      </div>
+      <div class="section-content">
+        <form>
+          <div class="row-inputs">
+            <div class="form-input">
+              <mat-form-field appearance="outline">
+                <mat-label>First & last name *</mat-label>
+                <input matInput />
+              </mat-form-field>
+              <mat-icon>perm_identity</mat-icon>
+            </div>
+            <div class="form-input">
+              <mat-form-field appearance="outline">
+                <mat-label>Email address *</mat-label>
+                <input matInput />
+                <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+              <mat-icon>mail</mat-icon>
+            </div>
+          </div>
+          <div class="row-inputs">
+            <div class="form-input">
+              <mat-form-field appearance="outline">
+                <mat-label
+                  >Introduce yourself (linkedIn/github links)</mat-label
+                >
+                <textarea
+                  matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="4"
+                  cdkAutosizeMaxRows="4"
+                ></textarea>
+              </mat-form-field>
+              <mat-icon>create</mat-icon>
+            </div>
+            <div class="form-input">
+              <div class="upload-cv">
+                <mat-icon class="upload">note_add</mat-icon>
+                <span>Upload CV (.pdf)</span>
+              </div>
+            </div>
+          </div>
+          <div class="row-inputs consent">
+            <mat-checkbox
+              >Processing data in the future recruitment
+            </mat-checkbox><span class="more" (click)="displayFutureContsent = !displayFutureContsent">{{displayFutureContsent ? 'less' : 'more'}}</span>
+            <div class="text-more" *ngIf="displayFutureContsent">Wyrażam zgodę na przetwarzanie moich danych osobowych dla celów przyszłych rekrutacji.</div>
+          </div>
+          <div class="row-inputs">
+            <div class="form-input"></div>
+            <div class="form-input">
+              <button class="submit-btn waves-effect" type="submit">
+                Apply <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
