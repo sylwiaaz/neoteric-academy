@@ -3,23 +3,26 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'over'" [opened]="false" position="end">
     <mat-toolbar class="sidenav-logo" [routerLink]="appRouterUrls.DEFAULT"><a class="header-logo">justjoin.it</a></mat-toolbar>
     <mat-nav-list class="sidenav-list">
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">work</mat-icon>Employer Panel
+      <a class="sidenav-list-item" >
+        <mat-icon>work</mat-icon>Employer Panel
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">share</mat-icon>JustJoinIt
+      <a class="sidenav-list-item" href="https://www.facebook.com/JustJoinIT/" target="_blank">
+        <mat-icon>share</mat-icon>JustJoinIt
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">mic</mat-icon>Event
+      <a class="sidenav-list-item">
+        <mat-icon>mic</mat-icon>Event
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">person_pin</mat-icon>About
+      <a class="sidenav-list-item">
+        <mat-icon>person_pin</mat-icon>About us
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">picture_as_pdf</mat-icon>Policy
+      <a class="sidenav-list-item">
+        <mat-icon>picture_as_pdf</mat-icon>Policy
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">email</mat-icon>Contact
+      <a class="sidenav-list-item">
+        <mat-icon>picture_as_pdf</mat-icon>Term
+      </a>
+      <a class="sidenav-list-item">
+        <mat-icon>email</mat-icon>Contact
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -28,22 +31,22 @@
       <a class="header-logo" [routerLink]="appRouterUrls.DEFAULT">justjoin.it</a>
       <mat-nav-list class="menu-links">
         <a class="list-item" [routerLink]="appRouterUrls.DEFAULT" [routerLinkActive]="'active'">
-          <mat-icon aria-label="">work_outline</mat-icon>
+          <mat-icon>work_outline</mat-icon>
           Job offers
         </a>
         <a class="list-item" [routerLink]="appRouterUrls.BRANDS" [routerLinkActive]="'active'">
-          <mat-icon aria-label="">business</mat-icon> Brand stories
+          <mat-icon>business</mat-icon> Brand stories
         </a>
         <a class="list-item" href="https://geek.justjoin.it/" target="_blank">
-          <mat-icon aria-label="">menu_book</mat-icon>Just Geek IT
+          <mat-icon>menu_book</mat-icon>Just Geek IT
         </a>
-        <a class="list-item" href="#">
-          <mat-icon aria-label="">people</mat-icon> Matchmaking
+        <a class="list-item">
+          <mat-icon>people</mat-icon> Matchmaking
         </a>
       </mat-nav-list>
       <div class="menu-btns">
-        <a class="post-job btn-rounded">Post a job</a>
-        <a class="sign-in btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
+        <a matRipple class="post-job btn-rounded">Post a job</a>
+        <a matRipple class="sign-in btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
       </div>
       <button class="btn-toggle-nav" type="button" aria-label="Toggle sidenav" mat-icon-button
         (click)="drawer.toggle()">
