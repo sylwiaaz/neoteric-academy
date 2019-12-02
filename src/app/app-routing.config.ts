@@ -8,19 +8,22 @@ export const AppRoutes = {
   AUTH: 'auth',
   LOGIN: 'login',
   BRANDS: 'brands',
-  REGISTER: 'register'
+  REGISTER: 'register',
+  OFFER: ':id'
 };
 
 export const AppRouterLinks = {
   DEFAULT: [AppRoutes.DEFAULT],
   LOGIN: [AppRoutes.AUTH, AppRoutes.LOGIN],
   BRANDS: [AppRoutes.BRANDS],
-  REGISTER: [AppRoutes.AUTH, AppRoutes.REGISTER]
+  REGISTER: [AppRoutes.AUTH, AppRoutes.REGISTER],
+  OFFER: [AppRoutes.DEFAULT, AppRoutes.OFFER]
 };
 
 export const AppRouterUrls = {
   DEFAULT: `/${AppRoutes.DEFAULT}`,
   LOGIN: `/${AppRoutes.AUTH}/${AppRoutes.LOGIN}`,
   BRANDS: `/${AppRoutes.BRANDS}`,
-  REGISTER: `/${AppRoutes.AUTH}/${AppRoutes.REGISTER}`
+  REGISTER: `/${AppRoutes.AUTH}/${AppRoutes.REGISTER}`,
+  OFFER: `/${AppRoutes.DEFAULT}/${AppRoutes.OFFER}`
 };
