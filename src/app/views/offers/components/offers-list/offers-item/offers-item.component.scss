@@ -1,0 +1,169 @@
+.offer-border-left {
+  width: 6px;
+  border-radius: 6px 0 0 6px;
+  // background-color: brown;
+  height: 100%;
+}
+
+.offer-item {
+  display: flex;
+  text-decoration: none;
+  min-width: 0;
+  color: rgba(0, 0, 0, 0.87);
+  height: 100%;
+  font-size: 11px;
+  align-items: center;
+  flex: 1;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  border-radius: 6px;
+  height: 77px;
+  margin: 0 10px 12px 10px;
+  padding: 0;
+  background-color: #fff;
+}
+
+.offer-item:hover {
+  transition: box-shadow 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07), 0 3px 7px 0 rgba(0, 0, 0, 0.06);
+}
+
+.offer-item .company-logo-container {
+  height: 40px;
+  flex: 0 0 125px;
+  position: relative;
+
+  img {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-height: 40px;
+    max-width: 85px;
+    display: block;
+    border: 0;
+  }
+}
+
+.row {
+  width: 100%;
+  padding-right: 20px;
+}
+
+.first-line {
+  color: #5a6371;
+  display: flex;
+  align-items: center;
+
+  .job-title {
+    font-size: 17px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 5px 0 0;
+    line-height: 23px;
+    font-weight: 600;
+  }
+
+  .right-content {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  .salary {
+    line-height: 11px;
+    vertical-align: middle;
+    color: #1ec66c;
+    text-align: right;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .date {
+    color: #5a6371;
+    margin: 0 0 0 16px;
+    padding: 4px 7px;
+    border-radius: 16px;
+    white-space: nowrap;
+    line-height: 11px;
+    border: 1px solid #e0e0e0;   
+  }
+
+  .new {
+    color: #4256ef;
+    background-color: #d9ddfc;
+    text-transform: capitalize;
+  }
+}
+
+.second-line {
+  display: flex;
+  margin: 6px 0 0 0;
+
+  .company-info {
+    color: #99a1ab;
+    white-space: nowrap;
+
+    .mat-icon {
+      font-size: 14px;
+      height: 14px;
+      width: 14px;
+    }
+  }
+
+  .company-address {
+    margin: 0 0 0 15px;
+  }
+
+  .tags {
+    margin: 0 0 0 auto;
+    white-space: nowrap;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .tag {
+    display: inline-block;
+    color: #99a1ab;
+    margin-left: 6px;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    text-transform: lowercase;
+    padding: 4px 7px;
+    line-height: 11px;
+    overflow: hidden;
+    min-width: 1ch;
+  }
+}
+
+@media (max-width: 1024px) {
+  .offer-item {
+    height: 86px;
+  }
+
+  .company-logo-container {
+    flex: 0 0 112px;
+  }
+
+  .first-line {
+    display: block;
+
+    .job-title {
+      white-space: initial;
+      overflow: initial;
+      text-overflow: initial;
+    }
+
+    .right-content {
+      margin: 5px 0 0 0;
+    }
+    .date {
+      margin: 0 0 0 auto;
+    }
+  }
+
+  .second-line {
+    display: none;
+  }
+}

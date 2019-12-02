@@ -1,0 +1,35 @@
+<a class="offer-item" [routerLink]="[index]">
+ <div class="offer-border-left" [ngClass]="offer.tech"></div>
+  <div class="company-logo-container">
+    <img
+      class="company-logo"
+      src="{{ offer.logoPath }}"
+      alt="{{ offer.companyName }}"
+    />
+  </div>
+  <div class="row">
+    <div class="first-line">
+      <span class="job-title">{{ offer.jobTitle }}</span>
+      <div class="right-content">
+        <span class="salary">{{ offer.salary }}</span>
+        <span class="date" [ngClass]="{'new': offer.date === 'new'}">{{ offer.date }}</span>
+      </div>
+    </div>
+    <div class="second-line">
+      <div class="company-info">
+        <span class="company-name">
+          <mat-icon>business</mat-icon>
+          {{ offer.companyName }}</span
+        >
+        <span class="company-address">
+          <mat-icon>room</mat-icon>
+          {{ offer.companyAddress }}</span
+        >
+      </div>
+      <div class="tags">
+        <span class="tag" *ngFor="let tag of offer.skills"> {{ tag }}</span>
+      </div>
+    </div>
+  </div>
+</a>
+<router-outlet></router-outlet>
