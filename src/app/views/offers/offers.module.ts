@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { OffersComponents } from './components';
+import { OffersServices } from './services';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { OffersComponents } from './components';
     ...OffersComponents
   ],
   providers: [
-
+    ...OffersServices
   ]
 })
 export class OffersModule { }
