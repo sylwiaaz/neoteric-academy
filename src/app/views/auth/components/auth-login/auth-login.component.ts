@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services';
-import { AppRouterUrls } from '../../../../app-routing.config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-login',
@@ -9,6 +9,8 @@ import { AppRouterUrls } from '../../../../app-routing.config';
 })
 export class AuthLoginComponent {
   hide = true;
-  constructor(private authService: AuthService) { }
-
+  constructor(private authService: AuthService, private router: Router) { }
+  onNavigateToRegister() {
+    this.router.navigate(['/auth/register']);
+  }
 }
