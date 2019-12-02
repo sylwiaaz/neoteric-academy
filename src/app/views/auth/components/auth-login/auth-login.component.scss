@@ -7,7 +7,7 @@
 }
 
 .login {
-  width: 50%;
+  width: 55%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -17,11 +17,19 @@
 }
 
 .get-started {
-  color: #2E384D;
+  color: #2e384d;
   font-size: 34px;
   font-weight: 300;
   line-height: 1;
   margin-bottom: 20px;
+}
+
+.svg-inline--fa.fa-w-14 {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+  transform: translateY(-10%);
 }
 
 .sign-with {
@@ -36,11 +44,11 @@
     min-width: 48px;
     border-radius: 24px;
     line-height: 48px;
-    font-size: 14px;
+    font-size: 13px;
     margin: 8px 0;
     color: rgb(117, 117, 117);
-    font-weight: 400;
-    background-color: #F3F4F6;
+    font-weight: 500;
+    background-color: #f3f4f6;
   }
 
   a:hover {
@@ -60,8 +68,7 @@
     font-size: 14px;
     position: relative;
     top: -12px;
-    background:white;
-    // background-color:white;
+    background: white;
     padding: 0px 20px;
   }
 }
@@ -76,7 +83,10 @@
   }
 }
 
-form /deep/ .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+form
+  /deep/
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick,
 form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   color: #ff4081;
 }
@@ -96,7 +106,9 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   border-radius: 20px;
   color: #fff;
   background-color: #ff4081;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   font-weight: 600;
   line-height: 1.75;
   box-shadow: none;
@@ -109,7 +121,7 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
 
 .register {
   h6 {
-    color: #2E384D;
+    color: #2e384d;
     font-size: 14px;
     font-weight: 600;
   }
@@ -141,19 +153,20 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
 
 .login-img {
   margin-top: 15px;
-  width: 50%;
+  width: 45%;
   min-height: 90vh;
   background-image: url(../../../../../assets/images/software.png);
   background-repeat: no-repeat;
 }
 
-@media (min-width:850px) and (max-width: 1050px) {
+@media (min-width: 850px) and (max-width: 1056px) {
   .login-img {
-    width: 40%;
+    width: 37%;
   }
 
   .login {
-    width: 60%;
+    width: 63%;
+    padding: 50px 25px 75px;
 
     a {
       flex-basis: 45%;
@@ -161,8 +174,8 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
     }
   }
   .login-form /deep/ .mat-form-field-flex {
-      min-width: 350px;
-    }
+    min-width: 350px;
+  }
 }
 
 @media (max-width: 849px) {
