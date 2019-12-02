@@ -1,6 +1,6 @@
 <div class="filters">
   <div class="filters-place">
-    <div
+    <div matRipple
     *ngFor="let place of places"
     class="filter-btn waves-effect"
     [ngClass]="{ active: place === selectedPlace }"
@@ -8,7 +8,7 @@
       {{ place }}
     </div>
     <div class="filter-btn more wave-effect" (click)="onShow = !onShow">
-      <mat-icon>more_horiz</mat-icon>
+      <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
         <option class="other-option" *ngFor="let otherOption of otherPlaces">
           {{ otherOption }}
