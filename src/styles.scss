@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~leaflet/dist/leaflet.css";
 
 @import "styles/_overrides";
 @import "styles/_variables";
@@ -21,6 +22,7 @@ html > body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  line-height: 1.5;
 }
 
 app-root {
@@ -43,9 +45,11 @@ ul {
 
 .night-switch {
   color: #9e9e9e;
+
   .night-toggle {
     vertical-align: middle;
   }
+
   .mat-icon {
     font-size: 22px;
     vertical-align: middle;
@@ -83,6 +87,7 @@ ul {
   letter-spacing: 0.5px;
   cursor: pointer;
 }
+
 .filter-btn:hover {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -94,6 +99,7 @@ ul {
   cursor: pointer;
 
   .mat-icon {
+    border-radius: 50%;
     vertical-align: middle;
     color: #37474f;
   }
@@ -116,6 +122,14 @@ ul {
 
 .sidenav-container.mat-drawer-container {
   position: static;
+}
+
+.mat-drawer.mat-sidenav {
+  z-index: 10;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  z-index: 9;
 }
 
 .other-options {
@@ -165,7 +179,7 @@ ul {
   color: #484848;
   padding: 14px;
   border: 0px solid #dce0e0;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.05), 0 1px 5px 0 rgba(0,0,0,0.04);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.04);
   background-color: #fff;
 }
 
@@ -173,4 +187,87 @@ ul {
   font-size: 24px;
   font-weight: bold;
   color: #37474f;
+}
+
+.js {
+  background: linear-gradient(-90deg, #ffc706, #ffaf00);
+}
+
+.html {
+  background: linear-gradient(-90deg, #ff7d50, #fd5d21);
+}
+
+.php {
+  background: linear-gradient(-90deg, #41adfa, #157cfc);
+}
+
+.ruby {
+  background: linear-gradient(-90deg, #ef5350, #f44336);
+}
+
+.python {
+  background: linear-gradient(-90deg, #1f5eb6, #1f7bc4);
+}
+
+.java {
+  background: linear-gradient(-90deg, #fa656b, #f9597a);
+}
+
+.dotNet {
+  background: linear-gradient(-90deg, #3fc5e6, #4fa4fd);
+}
+
+.scala {
+  background: linear-gradient(-90deg, #f86468, #f1464c);
+}
+
+.cplus {
+  background: linear-gradient(-90deg, #2fcfbb, #37dd9c);
+}
+
+.mobile {
+  background: linear-gradient(-90deg, #e04f86, #ba4a8d);
+}
+
+.testing {
+  background: linear-gradient(-90deg, #89db54, #65af35);
+}
+
+.devops {
+  background: linear-gradient(-90deg, #5266e1, #8166e0);
+}
+
+.game {
+  background: linear-gradient(-90deg, #ff4081, #ec407a);
+}
+
+.ux {
+  background: linear-gradient(-90deg, #ffb74d, #ff9800);
+}
+
+.pm {
+  background: linear-gradient(-90deg, #80cbc4, #4db6ac);
+}
+
+.blockchain {
+  background: linear-gradient(-90deg, #ab47bc, #6a1b9a);
+}
+
+.security {
+  background: linear-gradient(-90deg, #536dfe, #0d47a1);
+}
+
+.data {
+  background: linear-gradient(-90deg, #009688, #00796b);
+}
+.golang {
+  background: linear-gradient(-90deg, #6ad7e5, #6a8be5);
+}
+
+.sap {
+  background: linear-gradient(-90deg, #02afeb, #1b68c2);
+}
+
+.other {
+  background: linear-gradient(-90deg, #ec4cb6, #d44bd5);
 }
