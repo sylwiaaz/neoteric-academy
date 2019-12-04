@@ -7,7 +7,7 @@
       (click)="selectedPlace = place">
       {{ place }}
     </div>
-    <div class="filter-btn more wave-effect" (click)="onShow = !onShow">
+    <div class="filter-btn more wave-effect" (click)="onShow = !onShow" (clickOutside)="onShow = false">
       <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
         <option class="other-option" *ngFor="let otherOption of otherPlaces">
