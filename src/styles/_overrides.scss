@@ -49,4 +49,16 @@ button:hover {
   .mat-select-panel {
     max-height: 400px;
   }
+
+ .cdk-overlay-pane {
+  transform: translateX(-25%) translateY(40px) !important;
+}
+}
+
+@media (max-width: 1024px) {
+  .cdk-overlay-container {
+      .cdk-overlay-pane {
+      transform: translateX(-16px) translateY(45px) !important;
+    }
+  }
 }
