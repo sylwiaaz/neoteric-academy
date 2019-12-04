@@ -1,4 +1,4 @@
-import { OffersListComponent } from './views/offers/components/offers-list/offers-list.component';
+import { OffersListComponent } from './views/offers/components/offers/offers-list/offers-list.component';
 import { BrandsViewComponent } from './views/brands/components/index';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
