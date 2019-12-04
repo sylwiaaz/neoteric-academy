@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SharedComponents } from './components';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
+import { ClickOutsideDirective } from './clickOutside.directive';
 
 @NgModule({
   imports: [
@@ -11,10 +12,12 @@ import { MaterialModule } from '../material/material.module';
     MaterialModule
   ],
   exports: [
-    ...SharedComponents
+    ...SharedComponents,
+    ClickOutsideDirective
   ],
   declarations: [
-    ...SharedComponents
+    ...SharedComponents,
+    ClickOutsideDirective
   ],
   providers: [
 
