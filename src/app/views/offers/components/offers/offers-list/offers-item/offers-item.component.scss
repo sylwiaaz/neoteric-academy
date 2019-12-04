@@ -1,7 +1,6 @@
 .offer-border-left {
   width: 6px;
   border-radius: 6px 0 0 6px;
-  // background-color: brown;
   height: 100%;
 }
 
@@ -30,7 +29,7 @@
 
 .offer-item .company-logo-container {
   height: 40px;
-  flex: 0 0 125px;
+  flex: 0 0 115px;
   position: relative;
 
   img {
@@ -85,7 +84,7 @@
     border-radius: 16px;
     white-space: nowrap;
     line-height: 11px;
-    border: 1px solid #e0e0e0;   
+    border: 1px solid #e0e0e0;
   }
 
   .new {

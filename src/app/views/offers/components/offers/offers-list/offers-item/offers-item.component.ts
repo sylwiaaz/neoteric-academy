@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppRouterUrls } from '../../../../../app-routing.config';
-import { Router } from '@angular/router';
+import { AppRouterUrls } from '../../../../../../app-routing.config';
 
 @Component({
   selector: 'app-offers-item',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OfferService } from '../../services';
+import { OfferService } from '../../../../services';
 import { ActivatedRoute } from '@angular/router';
-import { AppRouterUrls } from '../../../../app-routing.config';
+import { AppRouterUrls } from '../../../../../../app-routing.config';
 
 @Component({
   selector: 'app-offer-detail',
@@ -18,6 +18,6 @@ displayFutureContsent = false;
   ngOnInit() {
     const id = this.route.snapshot.params.id;
     this.offer = this.offerService.getOffer(id);
+    document.querySelector('.offers').scrollTop = 0;
   }
-
 }
