@@ -273,3 +273,50 @@ ul {
 .other {
   background: linear-gradient(-90deg, #ec4cb6, #d44bd5);
 }
+
+#map .leaflet-pane.leaflet-marker-pane > img {
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.offer-popup {
+  font-size: 13px;
+  font-weight: 300;
+  display: flex;
+}
+
+.logo-popup {
+  position: relative;
+  display: flex;
+  margin: auto 0;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.offer-info {
+  margin: 0 10px 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  .title-job,
+  .company-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .salary {
+    color: #1ec66c;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+}
+
+.leaflet-popup {
+  margin-bottom: 40px;
+}
+
+.leaflet-popup-tip-container {
+  margin-left: -25px;
+}
