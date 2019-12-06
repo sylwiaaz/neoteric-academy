@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../../../../services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AppRouterUrls } from '../../../../../../app-routing.config';
 
 @Component({
@@ -9,15 +9,22 @@ import { AppRouterUrls } from '../../../../../../app-routing.config';
   styleUrls: ['./offer-detail.component.scss']
 })
 export class OfferDetailComponent implements OnInit {
-offer;
-appRouterUrls = AppRouterUrls;
-showMoreClauseInfo = false;
-displayFutureContsent = false;
-  constructor(private offerService: OfferService, private route: ActivatedRoute) { }
+  offer;
+  id: number;
+  appRouterUrls = AppRouterUrls;
+  showMoreClauseInfo = false;
+  displayFutureContsent = false;
+  constructor(private offerService: OfferService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params.id;
-    this.offer = this.offerService.getOffer(id);
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params.id;
+        this.offer = this.offerService.getOffer(this.id);
+      }
+    );
     document.querySelector('.offers').scrollTop = 0;
   }
 }
