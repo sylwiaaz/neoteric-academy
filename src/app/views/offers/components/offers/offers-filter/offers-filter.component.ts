@@ -25,7 +25,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
   };
   defaultValueExp = 'Exp. level';
   onShow = false;
-  onShowSalary = false;
+  isShowSalary = false;
 
   currentValueSalary: string;
   selectedTech = 'All';
@@ -56,6 +56,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
   allTechnologies = ['All', ...this.technologies.map(tech => tech.name), ...this.otherTechnologies.map(tech => tech.name)];
 
   public isDesktopWidth = window.innerWidth > 1024 ? true : false;
+  // public isDesktopWidth: boolean;
   private resizeSubscription: Subscription;
   constructor(private resizeService: ResizeService) {
   }
@@ -70,6 +71,14 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
     } else {
       return `${this.value / 1000}k - ${this.highValue / 1000}k PLN`;
     }
+  }
+
+  onShowSalary(e) {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    this.isShowSalary = !this.isShowSalary;
+    console.log(this.isShowSalary);
   }
 
   ngOnInit() {
