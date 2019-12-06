@@ -80,7 +80,7 @@ ul {
   height: 35px;
   line-height: 35px;
   padding: 0 12px;
-  font-size: 0.9rem;
+  font-size: 13px;
   border-radius: 20px;
   vertical-align: middle;
   border: none;
@@ -313,10 +313,6 @@ ul {
   }
 }
 
-.leaflet-popup {
-  margin-bottom: 40px;
-}
-
-.leaflet-popup-tip-container {
-  margin-left: -25px;
+.leaflet-tooltip-pane {
+  top: -27px;
 }
