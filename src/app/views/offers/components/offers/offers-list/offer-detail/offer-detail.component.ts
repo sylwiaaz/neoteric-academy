@@ -1,3 +1,4 @@
+import { MapService } from './../../../../services';
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../../../../services';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class OfferDetailComponent implements OnInit {
   displayFutureContsent = false;
   constructor(private offerService: OfferService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private mapService: MapService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -25,6 +27,12 @@ export class OfferDetailComponent implements OnInit {
         this.offer = this.offerService.getOffer(this.id);
       }
     );
+    this.mapService.zoomToPlace(this.offer.location);
     document.querySelector('.offers').scrollTop = 0;
+  }
+
+  onNavigateBack() {
+    this.router.navigate([''], {relativeTo: this.route});
+    this.mapService.zoomOut();
   }
 }
