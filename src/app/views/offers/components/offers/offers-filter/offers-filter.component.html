@@ -31,7 +31,25 @@
       <span>{{ tech.name }}</span>
     </div>
     <div
-      class="filter-btn more wave-effect"
+      class="tech"
+      *ngIf="addedTech"
+      (click)="selectedTech = addedTech.name"
+    >
+      <div
+        matRipple
+        class="filter-btn waves-effect"
+        [ngClass]="{
+          active: addedTech.name === selectedTech,
+          inactive: addedTech.name !== selectedTech && selectedTech !== 'All'
+        }"
+        [style.background]="addedTech.background"
+      >
+        <img [src]="addedTech.icon" alt="addedTech.name" />
+      </div>
+      <span>{{ addedTech.name }}</span>
+    </div>
+    <div
+      class="filter-btn more"
       (click)="onShow = !onShow"
       (clickOutside)="onShow = false"
     >
@@ -40,7 +58,7 @@
         <div
           class="tech other-option"
           *ngFor="let otherOption of otherTechnologies"
-          (click)="selectedTech = otherOption.name"
+          (click)="onAddedTech(otherOption)"
         >
           <div
             matRipple
@@ -60,7 +78,7 @@
     </div>
     <div class="right-dropdowns">
       <div
-        class="filter-btn dropdown wave-effect"
+        class="filter-btn dropdown"
         (click)="onShowSalary($event)"
         (clickOutside)="isShowSalary = false"
         [ngClass]="{ active: currentValueSalary !== '$ Salary' }"
@@ -76,10 +94,10 @@
         </div>
       </div>
 
-      <div matRipple class="filter-btn dropdown wave-effect exp">
+      <div matRipple class="filter-btn dropdown waves-effect exp" [ngClass]="{active: expSelect.value}">
         <mat-icon>trending_up</mat-icon>
-        <mat-select [placeholder]="'Exp. level'" class="dropdown-select">
-          <mat-option matRipple class="other-option" [value]="'All'"
+        <mat-select [placeholder]="'Exp. level'" class="dropdown-select" #expSelect>
+          <mat-option matRipple class="other-option"
             >All</mat-option
           >
           <mat-option matRipple class="other-option" [value]="'Junior'"
@@ -91,7 +109,6 @@
           <mat-option matRipple class="other-option" [value]="'Senior'"
             >Senior</mat-option
           >
-          <!-- </div> -->
         </mat-select>
       </div>
     </div>
