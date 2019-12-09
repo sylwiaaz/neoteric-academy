@@ -1,7 +1,7 @@
 <div class="offer-detail">
   <div class="offer-header">
     <div class="background" [ngClass]="offer.tech">
-      <button class="back waves-effect" [routerLink]="appRouterUrls.DEFAULT">
+      <button class="back waves-effect" (click)="onNavigateBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
       <button class="share waves-effect">
