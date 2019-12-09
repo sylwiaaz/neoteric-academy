@@ -1,7 +1,5 @@
+import { MapService } from './../../../services';
 import { Component, OnInit } from '@angular/core';
-import * as L from 'leaflet';
-import { OfferService } from '../../../services';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-offers-map',
@@ -9,62 +7,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./offers-map.component.scss']
 })
 export class OffersMapComponent implements OnInit {
-  offers: any;
-  private map;
 
-  constructor(private offersService: OfferService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(private mapService: MapService) { }
 
   ngOnInit() {
-     this.offers = this.offersService.getOffers();
-     this.initMap();
-     this.makeMarkers(this.map);
-  }
-
-  initMap(): void {
-      this.map = L.map('map', {
-        center: [52.241, 19.226],
-        zoom: 5
-      });
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-  }
-
-  makeMarkers(map: L.map) {
-    this.offers.forEach((offer, index) => {
-      const lat = offer.location[0];
-      const lng = offer.location[1];
-      const logoPath = `../../../../../../assets/images/${offer.logoPath}`;
-
-      const customIcon = L.icon({
-        iconUrl: logoPath,
-        iconSize: [35, 35],
-        iconAnchor: [20, 20],
-        className: offer.tech
-      });
-
-      const marker = L.marker([lat, lng], { icon: customIcon });
-      marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
-      marker.addTo(map);
-      marker.on('click', () => {
-        this.router.navigate([index], { relativeTo: this.route });
-        map.flyTo([lat, lng], 13);
-      });
-    });
-  }
-
-  makeTooltip(offer) {
-    return '' + `<div class="offer-popup">
-    <div class="logo-popup"> ${offer.companyName} </div>
-    <div class="offer-info">
-    <span class="title-job">${offer.jobTitle}</span>
-    <span class="salary">${offer.salary}</span>
-    <span class="company-name">${offer.companyName}</span>
-    </div>
-    </div>`;
+    this.mapService.initMap();
+    this.mapService.makeMarkers();
   }
 
 }
