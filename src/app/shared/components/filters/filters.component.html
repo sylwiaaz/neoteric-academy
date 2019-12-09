@@ -7,10 +7,17 @@
       (click)="selectedPlace = place">
       {{ place }}
     </div>
+    <div matRipple
+    *ngIf="isAddedPlace"
+    class="filter-btn waves-effect"
+    [ngClass]="{ active: isAddedPlace === selectedPlace }"
+      (click)="selectedPlace = isAddedPlace">
+      {{ isAddedPlace }}
+    </div>
     <div class="filter-btn more wave-effect" (click)="onShow = !onShow" (clickOutside)="onShow = false">
       <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
-        <option class="other-option" *ngFor="let otherOption of otherPlaces">
+        <option class="other-option" *ngFor="let otherOption of otherPlaces" (click)="onAddPlace(otherOption)">
           {{ otherOption }}
         </option>
       </div>

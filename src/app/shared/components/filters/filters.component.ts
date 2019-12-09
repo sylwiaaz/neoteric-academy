@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltersComponent implements OnInit {
   onShow = false;
-
+  isAddedPlace: string;
   selectedPlace = 'All';
   places = ['All', 'Warszawa', 'Kraków', 'Wrocław', 'Poznań', 'Trójmiasto', 'Remote', 'World'];
   // tslint:disable-next-line: max-line-length
@@ -18,5 +18,8 @@ export class FiltersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
-
+  onAddPlace(otherOption) {
+    this.selectedPlace = otherOption;
+    this.isAddedPlace = otherOption;
+  }
 }
