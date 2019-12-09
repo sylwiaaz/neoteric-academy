@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, OnDestroy, AfterContentChecked } from 
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
 import { ResizeService } from '../../../../../shared/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offers-filter',
@@ -24,6 +25,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
     }
   };
   defaultValueExp = 'Exp. level';
+  addedTech;
   onShow = false;
   isShowSalary = false;
 
@@ -58,7 +60,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
   public isDesktopWidth = window.innerWidth > 1024 ? true : false;
   // public isDesktopWidth: boolean;
   private resizeSubscription: Subscription;
-  constructor(private resizeService: ResizeService) {
+  constructor(private resizeService: ResizeService, private router: Router ) {
   }
 
   signCurrentValue() {
@@ -91,6 +93,10 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
           this.isDesktopWidth = false;
         }
       });
+  }
+  onAddedTech(otherOption) {
+    this.selectedTech = otherOption.name;
+    this.addedTech = otherOption;
   }
 
   ngAfterContentChecked() {
