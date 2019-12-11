@@ -7,7 +7,7 @@
         [ngClass]="{
           active: selectedTech === 'All'
         }"
-        (click)="selectedTech = 'All'"
+        (click)="onChooseTech('All')"
       >
         All
       </div>
@@ -15,7 +15,7 @@
     <div
       class="tech"
       *ngFor="let tech of technologies"
-      (click)="selectedTech = tech.name"
+      (click)="onChooseTech(tech)"
     >
       <div
         matRipple
@@ -33,7 +33,7 @@
     <div
       class="tech"
       *ngIf="addedTech"
-      (click)="selectedTech = addedTech.name"
+      (click)="onChooseTech(addedTech)"
     >
       <div
         matRipple
@@ -90,13 +90,14 @@
             [(value)]="value"
             [(highValue)]="highValue"
             [options]="options"
+            (userChangeEnd)="onChooseSalary()"
           ></ng5-slider>
         </div>
       </div>
 
       <div matRipple class="filter-btn dropdown waves-effect exp" [ngClass]="{active: expSelect.value}">
         <mat-icon>trending_up</mat-icon>
-        <mat-select [placeholder]="'Exp. level'" class="dropdown-select" #expSelect>
+        <mat-select [placeholder]="'Exp. level'" class="dropdown-select" #expSelect (selectionChange)="onFilterExp($event.value)">
           <mat-option matRipple class="other-option"
             >All</mat-option
           >
@@ -116,13 +117,12 @@
 </app-filters>
 
 <app-filters-mobile *ngIf="!isDesktopWidth">
-  <mat-select class="filter-select" [value]="'All'">
+  <mat-select class="filter-select" [(value)]="selectedTech" (selectionChange)="onFilterTech($event.value)">
     <mat-option
       matRipple
       class="mobile-option"
       *ngFor="let tech of allTechnologies"
       [value]="tech"
-      (click)="selectedTech = tech"
     >
       {{ tech }}
     </mat-option>
