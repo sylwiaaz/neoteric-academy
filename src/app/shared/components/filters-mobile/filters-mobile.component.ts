@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FilterService } from 'src/app/views/offers/services';
 
 @Component({
   selector: 'app-filters-mobile',
@@ -6,13 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filters-mobile.component.scss']
 })
 export class FiltersMobileComponent implements OnInit {
-  selectedPlace = 'All';
+  selectedPlace: string;
+  places: string[];
 
-  otherPlaces = ['Białystok', 'Bielsko-Biała', 'Bydgoszcz', 'Częstochowa', 'Gliwice', 'Katowice', 'Kielce', 'Lublin', 'Łódź', 'Olsztyn', 'Opole', 'Toruń', 'Rzeszów', 'Szczecin'];
-  places = ['All', 'Warszawa', 'Kraków', 'Wrocław', 'Poznań', 'Trójmiasto', 'Remote', 'World', ...this.otherPlaces];
-  constructor() { }
+  constructor(private router: Router, private filterService: FilterService) {
+    this.places = this.filterService.allPlaces;
+    this.selectedPlace = this.filterService.selectedPlace;
+  }
 
   ngOnInit() {
   }
 
+  onFilterPlace(place) {
+      this.filterService.selectedPlace = place;
+      this.filterService.onFilter();
+  }
 }
