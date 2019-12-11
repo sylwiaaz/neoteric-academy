@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FilterService } from 'src/app/views/offers/services';
 
 @Component({
   selector: 'app-filters',
@@ -9,17 +9,26 @@ import { Component, OnInit } from '@angular/core';
 export class FiltersComponent implements OnInit {
   onShow = false;
   isAddedPlace: string;
-  selectedPlace = 'All';
-  places = ['All', 'Warszawa', 'Kraków', 'Wrocław', 'Poznań', 'Trójmiasto', 'Remote', 'World'];
-  // tslint:disable-next-line: max-line-length
-  otherPlaces = ['Białystok', 'Bielsko-Biała', 'Bydgoszcz', 'Częstochowa', 'Gliwice', 'Katowice', 'Kielce', 'Lublin', 'Łódź', 'Olsztyn', 'Opole', 'Toruń', 'Rzeszów', 'Szczecin'];
-  allPlace = [...this.places, ...this.otherPlaces];
+  selectedPlace;
+  places: string[];
+  otherPlaces: string[];
 
-  constructor() { }
+  constructor(private filterService: FilterService) {
+     this.places = this.filterService.places;
+     this.otherPlaces = this.filterService.otherPlaces;
+     this.selectedPlace = this.filterService.selectedPlace;
+    }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
   onAddPlace(otherOption) {
-    this.selectedPlace = otherOption;
     this.isAddedPlace = otherOption;
+    this.onChoosePlace(otherOption);
+  }
+
+  onChoosePlace(place) {
+    this.selectedPlace = place;
+    this.filterService.selectedPlace = this.selectedPlace;
+    this.filterService.onFilter();
   }
 }
