@@ -14,8 +14,8 @@ export class MapService {
   constructor(private offerService: OfferService,
               private router: Router,
               private route: ActivatedRoute) {
-                this.offers = this.offerService.getOffers();
-              }
+    this.offers = this.offerService.getOffers();
+  }
 
   initMap(): void {
     this.map = L.map('map', {
@@ -29,7 +29,7 @@ export class MapService {
   }
 
   makeMarkers() {
-    this.offers.forEach((offer, index ) => {
+    this.offers.forEach((offer, index) => {
       const lat = offer.location[0];
       const lng = offer.location[1];
       const logoPath = `../../../../../../assets/images/${offer.logoPath}`;
@@ -44,10 +44,9 @@ export class MapService {
       marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
       marker.addTo(this.map);
       marker.on('click', () => {
-            this.router.navigate([`offers/${index}`]);
-            // this.map.flyTo([lat, lng], 13);
-          });
-        });
+        this.router.navigate([`offers/offer/${index}`]);
+      });
+    });
 
   }
 
