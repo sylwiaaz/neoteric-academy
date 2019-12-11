@@ -4,14 +4,14 @@
     *ngFor="let place of places"
     class="filter-btn waves-effect"
     [ngClass]="{ active: place === selectedPlace }"
-      (click)="selectedPlace = place">
+      (click)="onChoosePlace(place)">
       {{ place }}
     </div>
     <div matRipple
     *ngIf="isAddedPlace"
     class="filter-btn waves-effect"
     [ngClass]="{ active: isAddedPlace === selectedPlace }"
-      (click)="selectedPlace = isAddedPlace">
+      (click)="onChoosePlace(isAddedPlace)">
       {{ isAddedPlace }}
     </div>
     <div class="filter-btn more wave-effect" (click)="onShow = !onShow" (clickOutside)="onShow = false">
