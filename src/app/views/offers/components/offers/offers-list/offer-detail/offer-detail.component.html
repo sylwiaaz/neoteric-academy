@@ -98,13 +98,21 @@
           Nobis quasi voluptas mollitia.
         </div>
         <div class="clause">
-           <div class="moreClauseInformation" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fuga
-          quisquam exercitationem deserunt quaerat sint in magnam nisi sit,
-          similique harum eos doloremque iusto necessitatibus libero consequatur
-          animi esse quam. <span *ngIf="showMoreClauseInfo"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fuga
-          quisquam exercitationem deserunt quaerat sint in magnam nisi sit,
-          similique harum eos doloremque iusto necessitatibus libero consequatur
-          animi esse quam</span><span class="more" (click)="showMoreClauseInfo = !showMoreClauseInfo">{{ showMoreClauseInfo ? 'less': 'more' }}</span></div>
+          <div class="moreClauseInformation">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fuga
+            quisquam exercitationem deserunt quaerat sint in magnam nisi sit,
+            similique harum eos doloremque iusto necessitatibus libero
+            consequatur animi esse quam.
+            <span *ngIf="showMoreClauseInfo">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
+              fuga quisquam exercitationem deserunt quaerat sint in magnam nisi
+              sit, similique harum eos doloremque iusto necessitatibus libero
+              consequatur animi esse quam</span>
+              <span
+              class="more"
+              (click)="showMoreClauseInfo = !showMoreClauseInfo"
+              >{{ showMoreClauseInfo ? "less" : "more" }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -113,25 +121,19 @@
         Apply for the job
       </div>
       <div class="section-content">
-        <form>
+        <form [formGroup]="applyCVForm" (ngSubmit)="onApply()">
           <div class="row-inputs">
             <div class="form-input">
               <mat-form-field appearance="outline">
                 <mat-label>First & last name *</mat-label>
-                <input matInput />
+                <input matInput formControlName="name" />
               </mat-form-field>
               <mat-icon>perm_identity</mat-icon>
             </div>
             <div class="form-input">
               <mat-form-field appearance="outline">
                 <mat-label>Email address *</mat-label>
-                <input matInput />
-                <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                  Please enter a valid email address
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                  Email is <strong>required</strong>
-                </mat-error> -->
+                <input matInput formControlName="email" />
               </mat-form-field>
               <mat-icon>mail</mat-icon>
             </div>
@@ -140,8 +142,7 @@
             <div class="form-input">
               <mat-form-field appearance="outline">
                 <mat-label
-                  >Introduce yourself (linkedIn/github links)</mat-label
-                >
+                  >Introduce yourself (linkedIn/github links)</mat-label>
                 <textarea
                   matInput
                   cdkTextareaAutosize
@@ -160,13 +161,21 @@
           </div>
           <div class="row-inputs consent">
             <mat-checkbox
-              >Processing data in the future recruitment
-            </mat-checkbox><span class="more" (click)="displayFutureContsent = !displayFutureContsent">{{displayFutureContsent ? 'less' : 'more'}}</span>
-            <div class="text-more" *ngIf="displayFutureContsent">Wyrażam zgodę na przetwarzanie moich danych osobowych dla celów przyszłych rekrutacji.</div>
+              >Processing data in the future recruitment </mat-checkbox
+            ><span
+              class="more"
+              (click)="displayFutureContsent = !displayFutureContsent"
+              >{{ displayFutureContsent ? "less" : "more" }}</span>
+            <div class="text-more" *ngIf="displayFutureContsent">
+              Wyrażam zgodę na przetwarzanie moich danych osobowych dla celów
+              przyszłych rekrutacji.
+            </div>
           </div>
           <div class="row-inputs">
             <div class="form-input"></div>
             <div class="form-input">
+              <span *ngIf="isInvalidForm" class="invalid-form"
+                >Some fields are invalid</span>
               <button class="submit-btn waves-effect" type="submit">
                 Apply <mat-icon>send</mat-icon>
               </button>

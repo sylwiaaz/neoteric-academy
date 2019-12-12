@@ -77,28 +77,34 @@
     <div class="line">
       <span> Or </span>
     </div>
-    <form class="login-form">
+    <form class="login-form" [formGroup]="signUpForm" (ngSubmit)="onLogin()">
       <div class="form-input">
         <mat-icon>perm_identity</mat-icon>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput />
-          <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          <input matInput formControlName="email" autocomplete="off"/>
+          <mat-error *ngIf="signUpForm.get('email').hasError('email') && !signUpForm.get('email').hasError('required')">
           Please enter a valid email address
         </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error> -->
+        <mat-error *ngIf="signUpForm.get('email').hasError('required')">
+          Email is <strong>required</strong> field
+        </mat-error>
         </mat-form-field>
       </div>
       <div class="form-input">
         <mat-icon>lock</mat-icon>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"/>
           <mat-icon matSuffix (click)="hide = !hide">{{
             hide ? "visibility_off" : "visibility"
           }}</mat-icon>
+          <mat-error *ngIf="signUpForm.get('password').hasError('minlength') && !signUpForm.get('password').hasError('required')">
+            Password must be at least 6 characters
+          </mat-error>
+          <mat-error *ngIf="signUpForm.get('password').hasError('required')">
+            Password is <strong>required</strong> field
+          </mat-error>
         </mat-form-field>
       </div>
       <button class="submit-btn" type="submit">Sign in</button>
@@ -118,6 +124,5 @@
     </div>
   </div>
   <div class="login-img">
-    <!-- <img href="../../../../../assets/images/software.png"> -->
   </div>
 </div>
