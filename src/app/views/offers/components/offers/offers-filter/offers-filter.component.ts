@@ -1,5 +1,5 @@
 import { FilterService } from './../../../services/filter.service';
-import { Component, OnInit, EventEmitter, OnDestroy, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
 import { ResizeService } from '../../../../../shared/services';
@@ -10,7 +10,7 @@ import { ResizeService } from '../../../../../shared/services';
   templateUrl: './offers-filter.component.html',
   styleUrls: ['./offers-filter.component.scss']
 })
-export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class OffersFilterComponent implements OnInit, OnDestroy {
   slidersRefresh: EventEmitter<void> = new EventEmitter<void>();
 
   technologies: any[];
@@ -102,12 +102,10 @@ export class OffersFilterComponent implements OnInit, OnDestroy, AfterContentChe
   }
 
   onChooseSalary() {
+    this.currentValueSalary = this.signCurrentValue();
     this.filterService.selectedMinSal = this.value / 1000 + 'k';
     this.filterService.selectedMaxSal = this.highValue / 1000 + 'k';
     this.filterService.onFilter();
-  }
-  ngAfterContentChecked() {
-    this.currentValueSalary = this.signCurrentValue();
   }
 
   ngOnDestroy() {
