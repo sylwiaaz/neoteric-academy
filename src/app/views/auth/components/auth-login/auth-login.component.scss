@@ -14,6 +14,7 @@
   padding: 50px 50px 75px;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .get-started {
@@ -22,6 +23,7 @@
   font-weight: 300;
   line-height: 1;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .svg-inline--fa.fa-w-14 {
@@ -80,6 +82,7 @@
 
   /deep/ .mat-form-field-flex {
     min-width: 35vw;
+    padding: 0 0 0 0.75em;
   }
 }
 
@@ -150,6 +153,16 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   color: rgb(135, 152, 173);
   font-size: 14px;
 }
+.mat-checkbox.red {
+  .link,
+  /deep/ .mat-checkbox-label {
+    color: red;
+    font-weight: 400;
+  }
+  /deep/ .mat-checkbox-frame {
+    border-color: red !important;
+  }
+}
 
 .login-img {
   margin-top: 15px;
@@ -159,7 +172,7 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   background-repeat: no-repeat;
 }
 
-@media (min-width: 850px) and (max-width: 1056px) {
+@media (min-width: 769px) and (max-width: 1056px) {
   .login-img {
     width: 37%;
   }
@@ -178,26 +191,36 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   }
 }
 
-@media (max-width: 849px) {
+@media (max-width: 768px) {
   .login-img {
     display: none;
   }
 
   .login {
     width: 100%;
+    padding: 50px 3vw 75px;
 
     a {
-      flex-basis: 60%;
+      flex-basis: 100%;
       margin: 8px 0;
     }
 
     .line {
-      width: 70%;
+      width: 80%;
       margin: 20px 10vw 36px;
     }
   }
 
   .login-form /deep/ .mat-form-field-flex {
     min-width: 60vw;
+  }
+}
+
+@media (max-width: 425px) {
+  .login {
+    padding: 32px 15px;
+    a {
+      flex-basis: 90%;
+    }
   }
 }
