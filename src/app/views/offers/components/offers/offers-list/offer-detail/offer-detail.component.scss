@@ -336,6 +336,14 @@ mat-form-field.mat-form-field {
   margin-left: 5px;
 }
 
+.invalid-form {
+  font-size: 12px;
+  position: absolute;
+  transform: translate(50%, -100%);
+  text-align: center;
+  color: #d50000;
+}
+
 .submit-btn {
   background: linear-gradient(
     100deg,
