@@ -9,7 +9,13 @@ export const AppRoutes = {
   LOGIN: 'login',
   BRANDS: 'brands',
   REGISTER: 'register',
-  OFFER: ':id'
+  OFFER: 'offer',
+  OFFERID: ':id',
+  PLACE: ':place',
+  FILTERTECH: ':place/:tech',
+  FILTEREXP: ':place/:tech/:exp',
+  FILTERMINSAL: ':place/:tech/:exp/:minSal',
+  FILTERMAXSAL: ':place/:tech/:exp/:minSal/:maxSal'
 };
 
 export const AppRouterLinks = {
@@ -17,7 +23,12 @@ export const AppRouterLinks = {
   LOGIN: [AppRoutes.AUTH, AppRoutes.LOGIN],
   BRANDS: [AppRoutes.BRANDS],
   REGISTER: [AppRoutes.AUTH, AppRoutes.REGISTER],
-  OFFER: [AppRoutes.DEFAULT, AppRoutes.OFFER]
+  OFFER: [AppRoutes.DEFAULT, AppRoutes.OFFER],
+  PLACE: [AppRoutes.DEFAULT, AppRoutes.PLACE],
+  FILTERTECH: [AppRoutes.DEFAULT, AppRoutes.FILTERTECH],
+  FILTEREXP: [AppRoutes.DEFAULT, AppRoutes.FILTEREXP],
+  FILTERMINSAL: [AppRoutes.DEFAULT, AppRoutes.FILTERMINSAL],
+  FILTERMAXSAL: [AppRoutes.DEFAULT, AppRoutes.FILTERMAXSAL]
 };
 
 export const AppRouterUrls = {
@@ -25,5 +36,11 @@ export const AppRouterUrls = {
   LOGIN: `/${AppRoutes.AUTH}/${AppRoutes.LOGIN}`,
   BRANDS: `/${AppRoutes.BRANDS}`,
   REGISTER: `/${AppRoutes.AUTH}/${AppRoutes.REGISTER}`,
-  OFFER: `/${AppRoutes.DEFAULT}/${AppRoutes.OFFER}`
+  OFFER: `/${AppRoutes.DEFAULT}/${AppRoutes.OFFER}`,
+  OFFERID: `/${AppRoutes.DEFAULT}/${AppRoutes.OFFER}/${AppRoutes.OFFERID}`,
+  PLACE: `/${AppRoutes.DEFAULT}/${AppRoutes.PLACE} `,
+  FILTERTECH: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERTECH} `,
+  FILTEREXP: `${AppRoutes.DEFAULT}/${AppRoutes.FILTEREXP} `,
+  FILTERMINSAL: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERMINSAL} `,
+  FILTERMAXSAL: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERMAXSAL} `
 };

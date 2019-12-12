@@ -22,13 +22,20 @@ const routes: Routes = [
   {
     path: AppRoutes.DEFAULT, component: OffersComponent, children: [
       { path: '', component: OffersListComponent },
-      { path: AppRoutes.OFFER, component: OfferDetailComponent }
+      {
+        path: AppRoutes.OFFER, children: [
+          { path: AppRoutes.OFFERID, component: OfferDetailComponent }]
+      },
+      { path: AppRoutes.PLACE, component: OffersListComponent },
+      { path: AppRoutes.FILTERTECH, component: OffersListComponent },
+      { path: AppRoutes.FILTEREXP, component: OffersListComponent },
+      { path: AppRoutes.FILTERMINSAL, component: OffersListComponent },
+      { path: AppRoutes.FILTERMAXSAL, component: OffersListComponent }
     ]
-  }
-];
+  }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
