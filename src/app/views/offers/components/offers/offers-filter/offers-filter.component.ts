@@ -16,7 +16,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
   technologies: any[];
   otherTechnologies: any[];
   allTechnologies: string[];
-
+  indexTech;
   value = 0;
   highValue = 51000;
   options: Options = {
@@ -75,14 +75,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
       .subscribe(size => {
         this.isDesktopWidth = size.innerWidth > 1024 ? true : false;
       });
-  }
-  onAddedTech(otherOption) {
-    this.addedTech = otherOption;
-    this.onFilterTech(otherOption);
-  }
 
-  onChooseTech(tech) {
-    this.onFilterTech(tech);
   }
 
   onFilterTech(tech) {
@@ -92,13 +85,17 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
       this.selectedTech = tech;
     }
     this.filterService.selectedTech = this.selectedTech;
+    this.indexTech = this.allTechnologies.findIndex(item => item === this.selectedTech);
+    if (this.indexTech > this.technologies.length) {
+      this.addedTech = this.otherTechnologies[this.indexTech - this.technologies.length - 1];
+    }
     this.filterService.onFilter();
   }
 
   onFilterExp(exp) {
-   this.selectedExp = exp ? exp : 'All';
-   this.filterService.selectedExp = this.selectedExp;
-   this.filterService.onFilter();
+    this.selectedExp = exp ? exp : 'All';
+    this.filterService.selectedExp = this.selectedExp;
+    this.filterService.onFilter();
   }
 
   onChooseSalary() {
@@ -106,6 +103,14 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     this.filterService.selectedMinSal = this.value / 1000 + 'k';
     this.filterService.selectedMaxSal = this.highValue / 1000 + 'k';
     this.filterService.onFilter();
+  }
+
+  isActiveBtn(tech) {
+    if (tech === this.selectedTech) {
+      return 'active';
+    } else if (tech !== this.selectedTech && this.selectedTech !== 'All') {
+      return 'inactive';
+    }
   }
 
   ngOnDestroy() {

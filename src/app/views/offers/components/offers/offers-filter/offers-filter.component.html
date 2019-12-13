@@ -7,25 +7,19 @@
         [ngClass]="{
           active: selectedTech === 'All'
         }"
-        (click)="onChooseTech('All')"
-      >
+        (click)="onFilterTech('All')">
         All
       </div>
     </div>
     <div
       class="tech"
       *ngFor="let tech of technologies"
-      (click)="onChooseTech(tech)"
-    >
+      (click)="onFilterTech(tech)">
       <div
         matRipple
         class="filter-btn waves-effect"
-        [ngClass]="{
-          active: tech.name === selectedTech,
-          inactive: tech.name !== selectedTech && selectedTech !== 'All'
-        }"
-        [style.background]="tech.background"
-      >
+        [ngClass]="isActiveBtn(tech.name)"
+        [style.background]="tech.background">
         <img [src]="tech.icon" alt="tech.name" />
       </div>
       <span>{{ tech.name }}</span>
@@ -33,17 +27,12 @@
     <div
       class="tech"
       *ngIf="addedTech"
-      (click)="onChooseTech(addedTech)"
-    >
+      (click)="onFilterTech(addedTech)">
       <div
         matRipple
         class="filter-btn waves-effect"
-        [ngClass]="{
-          active: addedTech.name === selectedTech,
-          inactive: addedTech.name !== selectedTech && selectedTech !== 'All'
-        }"
-        [style.background]="addedTech.background"
-      >
+        [ngClass]="isActiveBtn(addedTech.name)"
+        [style.background]="addedTech.background">
         <img [src]="addedTech.icon" alt="addedTech.name" />
       </div>
       <span>{{ addedTech.name }}</span>
@@ -51,25 +40,18 @@
     <div
       class="filter-btn more"
       (click)="onShow = !onShow"
-      (clickOutside)="onShow = false"
-    >
+      (clickOutside)="onShow = false">
       <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
         <div
           class="tech other-option"
           *ngFor="let otherOption of otherTechnologies"
-          (click)="onAddedTech(otherOption)"
-        >
+          (click)="onFilterTech(otherOption)">
           <div
             matRipple
             class="filter-btn waves-effect"
-            [ngClass]="{
-              active: otherOption.name === selectedTech,
-              inactive:
-                otherOption.name !== selectedTech && selectedTech !== 'All'
-            }"
-            [style.background]="otherOption.background"
-          >
+            [ngClass]="isActiveBtn(otherOption.name)"
+            [style.background]="otherOption.background">
             <img [src]="otherOption.icon" alt="tech.name" />
           </div>
           <span>{{ otherOption.name }}</span>
@@ -81,8 +63,7 @@
         class="filter-btn dropdown"
         (click)="onShowSalary($event)"
         (clickOutside)="isShowSalary = false"
-        [ngClass]="{ active: currentValueSalary !== '$ Salary' }"
-      >
+        [ngClass]="{ active: currentValueSalary !== '$ Salary' }">
         {{ currentValueSalary }} <mat-icon>arrow_drop_down </mat-icon>
         <div class="other-option range" *ngIf="isShowSalary">
           <div>Choose your salary</div>
@@ -99,17 +80,13 @@
         <mat-icon>trending_up</mat-icon>
         <mat-select [placeholder]="'Exp. level'" class="dropdown-select" #expSelect (selectionChange)="onFilterExp($event.value)">
           <mat-option matRipple class="other-option"
-            >All</mat-option
-          >
-          <mat-option matRipple class="other-option" [value]="'Junior'"
-            >Junior</mat-option
-          >
+            >All</mat-option>
+          <mat-option matRipple class="other-option" [value]="'Junior'">
+            Junior</mat-option>
           <mat-option matRipple class="other-option" [value]="'Mid'"
-            >Mid</mat-option
-          >
+            >Mid</mat-option>
           <mat-option matRipple class="other-option" [value]="'Senior'"
-            >Senior</mat-option
-          >
+            >Senior</mat-option>
         </mat-select>
       </div>
     </div>
@@ -122,8 +99,7 @@
       matRipple
       class="mobile-option"
       *ngFor="let tech of allTechnologies"
-      [value]="tech"
-    >
+      [value]="tech">
       {{ tech }}
     </mat-option>
   </mat-select>
