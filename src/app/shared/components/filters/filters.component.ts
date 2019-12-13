@@ -12,14 +12,20 @@ export class FiltersComponent implements OnInit {
   selectedPlace;
   places: string[];
   otherPlaces: string[];
+  indexPlace: number;
 
   constructor(private filterService: FilterService) {
-     this.places = this.filterService.places;
-     this.otherPlaces = this.filterService.otherPlaces;
-     this.selectedPlace = this.filterService.selectedPlace;
-    }
+    this.places = this.filterService.places;
+    this.otherPlaces = this.filterService.otherPlaces;
+    this.selectedPlace = this.filterService.selectedPlace;
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.indexPlace = this.filterService.allPlaces.findIndex(item => item === this.selectedPlace);
+    if (this.indexPlace > 7) {
+      this.isAddedPlace = this.selectedPlace;
+    }
+  }
 
   onAddPlace(otherOption) {
     this.isAddedPlace = otherOption;
