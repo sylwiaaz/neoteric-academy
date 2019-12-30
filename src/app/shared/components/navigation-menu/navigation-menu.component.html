@@ -3,8 +3,8 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'over'" [opened]="false" position="end">
     <mat-toolbar class="sidenav-logo" [routerLink]="appRouterUrls.DEFAULT"><a class="header-logo">justjoin.it</a></mat-toolbar>
     <mat-nav-list class="sidenav-list">
-      <a class="sidenav-list-item" >
-        <mat-icon>work</mat-icon>Employer Panel
+      <a class="sidenav-list-item" [routerLink]="appRouterUrls.PROFILE" [routerLinkActive]="'active'" (click)="drawer.toggle()">
+        <mat-icon>work</mat-icon>Developer Panel
       </a>
       <a class="sidenav-list-item" href="https://www.facebook.com/JustJoinIT/" target="_blank">
         <mat-icon>share</mat-icon>JustJoinIt
@@ -40,13 +40,32 @@
         <a class="list-item" href="https://geek.justjoin.it/" target="_blank">
           <mat-icon>menu_book</mat-icon>Just Geek IT
         </a>
-        <a class="list-item">
+        <a class="list-item" [routerLink]="appRouterUrls.MATCHMAKING" [routerLinkActive]="'active'">
           <mat-icon>people</mat-icon> Matchmaking
         </a>
       </mat-nav-list>
       <div class="menu-btns">
         <a matRipple class="post-job btn-rounded">Post a job</a>
-        <a matRipple class="sign-in btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
+        <a matRipple class="sign-in btn-rounded" [routerLink]="appRouterUrls.LOGIN" *ngIf="!isLogged">Sign in</a>
+        <div class="sign-userbox" *ngIf="isLogged">
+          <div class="user-dropdown-header" (click)="isOpenUserDropdown = !isOpenUserDropdown" (clickOutside)="isOpenUserDropdown = false">
+            <div class="user-avatar">
+              <mat-icon>person_outline</mat-icon>
+            </div>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+          </div>
+          <div class="user-dropdown-body" [ngClass]="{show: isOpenUserDropdown}">
+            <a class="user-link" [routerLink]="appRouterUrls.PROFILE">
+              <mat-icon>person_outline</mat-icon> My profile
+            </a>
+            <a class="user-link" [routerLink]="appRouterUrls.SETTINGS">
+              <mat-icon>create</mat-icon>Settings
+            </a>
+            <a class="user-link" (click)="onLogOut()">
+              <mat-icon>power_settings_new</mat-icon>Log out
+            </a>
+          </div>
+        </div>
       </div>
       <button class="btn-toggle-nav" type="button" aria-label="Toggle sidenav" mat-icon-button
         (click)="drawer.toggle()">
