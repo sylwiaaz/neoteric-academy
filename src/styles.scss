@@ -19,10 +19,12 @@ html > body {
   background-color: #f3f6f8;
   height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   line-height: 1.5;
+  font-size: 14px;
 }
 
 app-root {
@@ -317,6 +319,23 @@ ul {
   top: -27px;
 }
 
-.mat-select-value, .mat-select-arrow {
+.mat-select-value,
+.mat-select-arrow {
   color: inherit;
-} 
+}
+
+.success-snackbar,
+.error-snackbar {
+  max-width: 200px !important;
+  height: auto;
+  padding: 20px;
+  margin-bottom: 20% !important;
+}
+
+.success-snackbar {
+  background: rgb(16, 134, 105);
+}
+
+.error-snackbar {
+  background: #b00020;
+}
