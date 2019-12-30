@@ -17,10 +17,15 @@ export class FiltersComponent implements OnInit {
   constructor(private filterService: FilterService) {
     this.places = this.filterService.places;
     this.otherPlaces = this.filterService.otherPlaces;
-    this.selectedPlace = this.filterService.selectedPlace;
+    // this.selectedPlace = this.filterService.selectedPlace;
   }
 
   ngOnInit() {
+    if (sessionStorage.getItem('selectedPlace') === null) {
+      this.selectedPlace = 'All';
+    } else {
+      this.selectedPlace = JSON.parse(sessionStorage.getItem('selectedPlace'));
+    }
     this.indexPlace = this.filterService.allPlaces.findIndex(item => item === this.selectedPlace);
     if (this.indexPlace > 7) {
       this.isAddedPlace = this.selectedPlace;
@@ -34,6 +39,7 @@ export class FiltersComponent implements OnInit {
 
   onChoosePlace(place) {
     this.selectedPlace = place;
+    sessionStorage.setItem('selectedPlace', JSON.stringify(this.selectedPlace));
     this.filterService.selectedPlace = this.selectedPlace;
     this.filterService.onFilter();
   }
