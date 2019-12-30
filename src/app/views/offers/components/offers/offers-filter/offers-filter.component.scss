@@ -173,6 +173,7 @@
     width: 140px;
     text-align: center;
     font-size: 13px;
+    z-index: unset;
 
     .mat-icon {
       vertical-align: middle;
@@ -203,4 +204,3 @@
   text-align: left;
   height: 35px;
 }
-
