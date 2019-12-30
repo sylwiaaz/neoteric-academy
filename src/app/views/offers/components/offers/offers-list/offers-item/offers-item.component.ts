@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppRouterUrls } from '../../../../../../app-routing.config';
+import { Offer } from '../../../../services/offer.model';
 
 @Component({
   selector: 'app-offers-item',
@@ -9,7 +10,7 @@ import { AppRouterUrls } from '../../../../../../app-routing.config';
 export class OffersItemComponent implements OnInit {
   appRouterUrls = AppRouterUrls;
 
-  @Input() offer;
+  @Input() offer: Offer;
   @Input() index: number;
   constructor() { }
 
