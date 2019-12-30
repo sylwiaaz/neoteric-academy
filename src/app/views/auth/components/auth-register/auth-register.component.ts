@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AuthRegisterComponent implements OnInit {
   hide = true;
+  clickSubmit = false;
   registerForm: FormGroup;
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -17,6 +18,7 @@ export class AuthRegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       email: new FormControl(null, [Validators.required,
       Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       termAccept: new FormControl(null, Validators.required)
     });
   }
@@ -26,14 +28,16 @@ export class AuthRegisterComponent implements OnInit {
   }
 
   onRegister() {
-    // console.log('ok');
+    this.clickSubmit = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.authService.createUser(this.registerForm.value.email, this.registerForm.value.password);
   }
 
-  isInvalid() {
-    if (!this.registerForm.get('termAccept').valid) {
-      if (this.registerForm.get('email').touched || this.registerForm.get('termAccept').touched) {
+  isInvalidCheckbox() {
+    if (this.clickSubmit && !this.registerForm.get('termAccept').value) {
         return true;
-      }
     }
     return false;
   }
