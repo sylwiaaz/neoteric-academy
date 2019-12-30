@@ -1,0 +1,36 @@
+<div class="panel-container">
+<aside class="aside">
+  <div class="aside-content">
+    <mat-nav-list class="nav-list">
+        <div class="user-info">
+          <div class="user-logo">
+            <mat-icon>person_outline</mat-icon>
+        </div>
+        <div class="user-login">
+            <span class="greet">Welcome</span>
+            <span class="login">{{ currentUser }}</span>
+        </div>
+      </div>
+        <div class="dashboard-items">
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.PROFILE" [routerLinkActive]="'active'">
+              <mat-icon>person_outline</mat-icon>My profile
+            </a>
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.PREFERENCES" [routerLinkActive]="'active'">
+              <mat-icon>settings_outline</mat-icon> Preferences
+            </a>
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.SETTINGS" [routerLinkActive]="'active'">
+              <mat-icon>edit_outline</mat-icon>Settings
+            </a>
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.MATCHMAKING" [routerLinkActive]="'active'"> <mat-icon>people</mat-icon> Matchmaking </a>
+            <a class="sidenav-list-item" (click)="onLogout()">
+              <mat-icon>power_settings_new</mat-icon>Log Out
+            </a>
+          </div>
+    </mat-nav-list>
+  </div>
+</aside>
+<main class="main">
+  <ng-content></ng-content>
+  <router-outlet></router-outlet>
+</main>
+</div>
