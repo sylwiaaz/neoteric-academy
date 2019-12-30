@@ -77,7 +77,7 @@
     <div class="line">
       <span> Or </span>
     </div>
-    <form class="login-form" (ngSumbit)="onRegister()" [formGroup]="registerForm">
+    <form class="login-form" (ngSubmit)="onRegister()" [formGroup]="registerForm">
       <div class="form-input">
         <mat-icon>perm_identity</mat-icon>
         <mat-form-field appearance="outline">
@@ -91,8 +91,23 @@
         </mat-error>
         </mat-form-field>
       </div>
-      <!-- registerForm.get('email').touched && !registerForm.get('termAccept').valid -->
-      <mat-checkbox formControlName="termAccept" [ngClass]="{red: isInvalid()}">
+      <div class="form-input">
+        <mat-icon>lock</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"/>
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="registerForm.get('password').hasError('minlength') && !registerForm.get('password').hasError('required')">
+            Password must be at least 6 characters
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('password').hasError('required')">
+            Password is <strong>required</strong> field
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-checkbox formControlName="termAccept" [ngClass]="{red: isInvalidCheckbox()}">
         I accept <span><a class="link">terms</a></span> of service*
       </mat-checkbox>
       <button class="submit-btn" type="submit">Register</button>
