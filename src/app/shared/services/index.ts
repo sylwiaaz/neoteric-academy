@@ -1,9 +1,12 @@
 import { ResizeService } from './resize.service';
+import { SnackBarService } from './snackBar.service';
 
 export const SharedServices = [
-  ResizeService
+  ResizeService,
+  SnackBarService
 ];
 
 export {
-  ResizeService
+  ResizeService,
+  SnackBarService
 };
