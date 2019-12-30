@@ -1,3 +1,4 @@
+import { Offer } from './../../../../services/offer.model';
 import { MapService } from './../../../../services';
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../../../../services';
@@ -11,42 +12,44 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./offer-detail.component.scss']
 })
 export class OfferDetailComponent implements OnInit {
-  offer;
+  offer: Offer;
   id: number;
   appRouterUrls = AppRouterUrls;
   showMoreClauseInfo = false;
   displayFutureContsent = false;
   applyCVForm: FormGroup;
   isInvalidForm: boolean;
+
   constructor(private offerService: OfferService,
               private router: Router,
               private route: ActivatedRoute,
-              private mapService: MapService) { }
-
-  ngOnInit() {
+              private mapService: MapService) {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params.id;
-        this.offer = this.offerService.getOffer(this.id);
+        this.offerService.getOffers().subscribe(offers => {
+          this.offer = offers[this.id];
+          this.mapService.zoomToPlace(this.offer.location);
+        });
       }
     );
-    this.mapService.zoomToPlace(this.offer.location);
-    document.querySelector('.offers').scrollTop = 0;
+  }
 
-    this.applyCVForm = new FormGroup( {
+  ngOnInit() {
+    document.querySelector('.offers').scrollTop = 0;
+    this.applyCVForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required,
-    Validators.email])
+      Validators.email])
     });
   }
 
   onNavigateBack() {
-    this.router.navigate([''], {relativeTo: this.route});
+    this.router.navigate([''], { relativeTo: this.route });
     this.mapService.zoomOut();
   }
 
   onApply() {
-    console.log(this.applyCVForm);
-    this.isInvalidForm =  !this.applyCVForm.valid;
+    this.isInvalidForm = !this.applyCVForm.valid;
   }
 }
