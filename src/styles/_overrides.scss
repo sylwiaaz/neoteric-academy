@@ -50,15 +50,20 @@ button:hover {
     max-height: 400px;
   }
 
- .cdk-overlay-pane {
-  transform: translateX(-25%) translateY(40px) !important;
-}
+  .cdk-overlay-pane {
+    transform: translateX(-25%) translateY(40px) !important;
+  }
 }
 
 @media (max-width: 1024px) {
   .cdk-overlay-container {
-      .cdk-overlay-pane {
+    .cdk-overlay-pane {
       transform: translateX(-16px) translateY(45px) !important;
     }
   }
+}
+
+
+.switch .mat-slide-toggle-thumb-container {
+  z-index: unset !important;
 }
