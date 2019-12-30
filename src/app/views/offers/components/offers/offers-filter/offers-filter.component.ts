@@ -34,17 +34,16 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
   addedTech;
   onShow = false;
   isShowSalary = false;
-  currentValueSalary;
+  currentValueSalary: string;
 
-  selectedTech = 'All';
-  selectedPlace: string;
+  selectedTech;
   selectedExp: string;
 
   public isDesktopWidth = window.innerWidth > 1024 ? true : false;
   private resizeSubscription: Subscription;
 
   constructor(private resizeService: ResizeService,
-              private filterService: FilterService) { }
+              private filterService: FilterService) {}
 
   signCurrentValue() {
     if (this.value === this.options.floor && this.highValue === this.options.ceil) {
@@ -66,15 +65,24 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedPlace = this.filterService.selectedPlace;
-    this.technologies = this.filterService.technologies;
-    this.otherTechnologies = this.filterService.otherTechnologies;
-    this.allTechnologies = this.filterService.allTechnologies;
-    this.currentValueSalary = this.signCurrentValue();
     this.resizeSubscription = this.resizeService.onResize$
       .subscribe(size => {
         this.isDesktopWidth = size.innerWidth > 1024 ? true : false;
       });
+    if (sessionStorage.getItem('selectedTech') === null) {
+      this.selectedTech = 'All';
+    } else {
+      this.selectedTech = JSON.parse(sessionStorage.getItem('selectedTech'));
+    }
+    if (sessionStorage.getItem('addedTech') !== null) {
+      this.addedTech = JSON.parse(sessionStorage.getItem('addedTech'));
+    }
+
+    this.technologies = this.filterService.technologies;
+    this.otherTechnologies = this.filterService.otherTechnologies;
+    this.allTechnologies = this.filterService.allTechnologies;
+    this.currentValueSalary = this.signCurrentValue();
+
 
   }
 
@@ -84,12 +92,15 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     } else {
       this.selectedTech = tech;
     }
-    this.filterService.selectedTech = this.selectedTech;
+    // this.filterService.selectedTech = this.selectedTech;
     this.indexTech = this.allTechnologies.findIndex(item => item === this.selectedTech);
     if (this.indexTech > this.technologies.length) {
       this.addedTech = this.otherTechnologies[this.indexTech - this.technologies.length - 1];
+      sessionStorage.setItem('addedTech', JSON.stringify(this.addedTech));
     }
+    sessionStorage.setItem('selectedTech', JSON.stringify(this.selectedTech));
     this.filterService.onFilter();
+
   }
 
   onFilterExp(exp) {
@@ -117,6 +128,9 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     if (this.resizeSubscription) {
       this.resizeSubscription.unsubscribe();
     }
+    sessionStorage.removeItem('selectedTech');
+    sessionStorage.removeItem('addedTech');
+    sessionStorage.removeItem('selectedPlace');
   }
 }
 
