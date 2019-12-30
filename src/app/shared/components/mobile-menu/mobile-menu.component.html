@@ -3,28 +3,64 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="'over'" [opened]="false" position="end">
     <mat-toolbar class="mobile-toolbar"><span class="header-logo">Menu</span>
       <button type="button" class="btn-toggle-nav" aria-label="Toggle sidenav" mat-icon-button
-        (click)="drawer.toggle()">
+        (click)="drawer.toggle(); changeBodyScrollBar(drawer)">
         <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
       </button></mat-toolbar>
     <mat-nav-list class="nav-list mobile-menu">
-      <a class="sidenav-list-item sign-as-Dev" [routerLink]="appRouterUrls.LOGIN">
+      <div *ngIf="isLogged">
+        <div class="user-info">
+          <div class="user-logo">
+            <mat-icon>person_outline</mat-icon>
+          </div>
+          <div class="user-login">
+            <span class="greet">Welcome</span>
+            <span class="login">{{ currentUser }}</span>
+          </div>
+        </div>
+        <div class="dashboard-dropdown">
+          <div class="dashboard-header" (click)="isOpenDropdown = !isOpenDropdown">
+            <mat-icon>dashboard_outline</mat-icon> Dashboard
+            <mat-icon *ngIf="!isOpenDropdown">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="isOpenDropdown">keyboard_arrow_up</mat-icon>
+          </div>
+          <div class="dashboard-body" [ngClass]="{ open: isOpenDropdown }">
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.PROFILE" (click)="drawer.toggle()">
+              <mat-icon>person_outline</mat-icon>My profile
+            </a>
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.PREFERENCES" (click)="drawer.toggle()">
+              <mat-icon>settings_outline</mat-icon> Preferences
+            </a>
+            <a class="sidenav-list-item" [routerLink]="appRouterUrls.SETTINGS" (click)="drawer.toggle()">
+              <mat-icon>edit_outline</mat-icon>Settings
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="sidenav-list-item sign-as-Dev" [routerLink]="appRouterUrls.LOGIN" *ngIf="!isLogged"
+        (click)="drawer.toggle()">
         <div class="icon-outline">
-          <mat-icon aria-label="">face</mat-icon>
+          <mat-icon>face</mat-icon>
         </div>
         Sign in as Developer
       </a>
-      <a class="sidenav-list-item" [routerLink]="appRouterUrls.DEFAULT" [routerLinkActive]="'active'">
-        <mat-icon aria-label="">work_outline</mat-icon>
+      <a class="sidenav-list-item" [routerLink]="appRouterUrls.DEFAULT" [routerLinkActive]="'active'"
+        (click)="drawer.toggle()">
+        <mat-icon>work_outline</mat-icon>
         Job offers
       </a>
-      <a class="sidenav-list-item" [routerLink]="appRouterUrls.BRANDS" [routerLinkActive]="'active'">
-        <mat-icon aria-label="">business</mat-icon> Brand stories
+      <a class="sidenav-list-item" [routerLink]="appRouterUrls.BRANDS" [routerLinkActive]="'active'"
+        (click)="drawer.toggle()">
+        <mat-icon>business</mat-icon> Brand stories
       </a>
       <a class="sidenav-list-item" href="https://geek.justjoin.it/" target="_blank">
-        <mat-icon aria-label="">menu_book</mat-icon>Just Geek IT
+        <mat-icon>menu_book</mat-icon>Just Geek IT
       </a>
-      <a class="sidenav-list-item" href="#">
-        <mat-icon aria-label="">people</mat-icon> Matchmaking
+      <a class="sidenav-list-item" [routerLink]="appRouterUrls.MATCHMAKING" [routerLinkActive]="'active'"
+        (click)="drawer.toggle()">
+        <mat-icon>people</mat-icon> Matchmaking
+      </a>
+      <a class="sidenav-list-item" *ngIf="isLogged" (click)="onLogOut(); drawer.toggle()">
+        <mat-icon>power_settings_new</mat-icon>Log Out
       </a>
       <div class="night-switch">
         <div class="switch">
@@ -40,11 +76,11 @@
       <div class="header-mobile">
         <a class="header-logo" [routerLink]="appRouterUrls.DEFAULT">justjoin.it</a>
         <button class="btn-toggle-nav" type="button" aria-label="Toggle sidenav" mat-icon-button
-          (click)="drawer.toggle()">
+          (click)="drawer.toggle(); changeBodyScrollBar(drawer)">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       </div>
-      <div class="sign-btns">
+      <div class="sign-btns" *ngIf="!isLogged">
         <a matRipple class="mobile-register btn-rounded" [routerLink]="appRouterUrls.REGISTER">Register</a>
         <a matRipple class="mobile-sign btn-rounded" [routerLink]="appRouterUrls.LOGIN">Sign in</a>
       </div>
