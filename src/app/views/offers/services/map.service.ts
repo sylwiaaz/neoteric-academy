@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OfferService } from './offer-service.service';
+import { Subscription } from 'rxjs';
+import { Offer } from './offer.model';
 
 
 @Injectable({
@@ -10,12 +12,8 @@ import { OfferService } from './offer-service.service';
 
 export class MapService {
   map;
-  offers: any;
-  constructor(private offerService: OfferService,
-              private router: Router,
-              private route: ActivatedRoute) {
-    this.offers = this.offerService.getOffers();
-  }
+  offers: Offer[];
+  constructor(private router: Router, private offerService: OfferService) { }
 
   initMap(): void {
     this.map = L.map('map', {
@@ -29,26 +27,28 @@ export class MapService {
   }
 
   makeMarkers() {
-    this.offers.forEach((offer, index) => {
-      const lat = offer.location[0];
-      const lng = offer.location[1];
-      const logoPath = `../../../../../../assets/images/${offer.logoPath}`;
+    this.offerService.getOffers().subscribe(offers => {
+      offers.forEach((offer, index) => {
+        const lat = offer.location[0];
+        const lng = offer.location[1];
+        const logoPath = `../../../../../../assets/images/${offer.logoPath}`;
 
-      const customIcon = L.icon({
-        iconUrl: logoPath,
-        iconSize: [35, 35],
-        iconAnchor: [20, 20],
-        className: offer.tech
-      });
-      const marker = L.marker([lat, lng], { icon: customIcon, autoPan: true });
-      marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
-      marker.addTo(this.map);
-      marker.on('click', () => {
-        this.router.navigate([`offers/offer/${index}`]);
+        const customIcon = L.icon({
+          iconUrl: logoPath,
+          iconSize: [35, 35],
+          iconAnchor: [20, 20],
+          className: offer.tech
+        });
+        const marker = L.marker([lat, lng], { icon: customIcon, autoPan: true });
+        marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
+        marker.addTo(this.map);
+        marker.on('click', () => {
+          this.router.navigate([`offers/offer/${index}`]);
+        });
       });
     });
-
   }
+
 
   makeTooltip(offer) {
     return '' + `<div class="offer-popup">
