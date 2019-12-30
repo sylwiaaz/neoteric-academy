@@ -48,23 +48,34 @@ export class FilterService {
   constructor(private router: Router) { }
 
   onFilter() {
-    if (this.selectedMaxSal === '51k') {
-      if (this.selectedMinSal === '0k') {
-        if (this.selectedExp.toLowerCase() === 'all') {
-          if (this.selectedTech.toLowerCase() === 'all') {
-            this.router.navigate([this.appRouterUrls.DEFAULT,
-            this.selectedPlace.toLowerCase()]);
+    this.selectedTech = sessionStorage.getItem('selectedTech') === null ? 'All' : JSON.parse(sessionStorage.getItem('selectedTech'));
+    if (this.router.url.includes('offers')) {
+      if (this.selectedMaxSal === '51k') {
+        if (this.selectedMinSal === '0k') {
+          if (this.selectedExp.toLowerCase() === 'all') {
+            if (this.selectedTech.toLowerCase() === 'all') {
+              this.router.navigate([this.appRouterUrls.DEFAULT,
+              this.selectedPlace.toLowerCase()]);
+            } else {
+              this.router.navigate([this.appRouterUrls.DEFAULT,
+              this.selectedPlace.toLowerCase(),
+              this.selectedTech.toLowerCase()]);
+            }
           } else {
-            this.router.navigate([this.appRouterUrls.DEFAULT,
-            this.selectedPlace.toLowerCase(),
-            this.selectedTech.toLowerCase()]);
+            this.router.navigate([
+              this.appRouterUrls.DEFAULT,
+              this.selectedPlace.toLowerCase(),
+              this.selectedTech.toLowerCase(),
+              this.selectedExp.toLowerCase()
+            ]);
           }
         } else {
           this.router.navigate([
             this.appRouterUrls.DEFAULT,
             this.selectedPlace.toLowerCase(),
             this.selectedTech.toLowerCase(),
-            this.selectedExp.toLowerCase()
+            this.selectedExp.toLowerCase(),
+            this.selectedMinSal
           ]);
         }
       } else {
@@ -73,18 +84,10 @@ export class FilterService {
           this.selectedPlace.toLowerCase(),
           this.selectedTech.toLowerCase(),
           this.selectedExp.toLowerCase(),
-          this.selectedMinSal
+          this.selectedMinSal,
+          this.selectedMaxSal
         ]);
       }
-    } else {
-      this.router.navigate([
-        this.appRouterUrls.DEFAULT,
-        this.selectedPlace.toLowerCase(),
-        this.selectedTech.toLowerCase(),
-        this.selectedExp.toLowerCase(),
-        this.selectedMinSal,
-        this.selectedMaxSal
-      ]);
     }
   }
 }
