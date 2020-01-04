@@ -1,8 +1,19 @@
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class IsAuthenticatedOnLoginGuard  {
-// check if user is authenticated on login (check cookies)
+export class IsAuthenticatedOnLoginGuard implements CanActivate {
+  // check if user is authenticated on login (check cookies)
 
-  constructor() { }
+  constructor(private router: Router, private cookieService: CookieService) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    if (!this.cookieService.check('id_token')) {
+      this.router.navigate(['/auth/login']);
+      return false;
+    }
+    return true;
+  }
 }
