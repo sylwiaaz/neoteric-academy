@@ -1,5 +1,5 @@
 export interface Offer {
-  _id: number;
+  _id: string;
   jobTitle: string;
   tech: string;
   salary: string;
