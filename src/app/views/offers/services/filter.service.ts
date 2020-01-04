@@ -164,7 +164,6 @@ export class FilterService {
       if (events instanceof NavigationEnd) {
 
         const urlParams = decodeURIComponent(this.router.url).split('/');
-        console.log(urlParams);
         const [slashSeg, offerSegment, placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg] = urlParams;
         if (urlParams.length === 2 && offerSegment === 'offers') {
           this.offerService.getOffers();
