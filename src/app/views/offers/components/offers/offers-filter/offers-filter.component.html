@@ -1,56 +1,32 @@
 <app-filters *ngIf="isDesktopWidth">
   <div class="filters-tech">
     <div class="btn-all">
-      <div
-        matRipple
-        class="filter-btn waves-effect"
-        [ngClass]="{
+      <div matRipple class="filter-btn waves-effect" [ngClass]="{
           active: selectedTech === 'All'
-        }"
-        (click)="onFilterTech('All')">
+        }" (click)="onFilterTech('All')">
         All
       </div>
     </div>
-    <div
-      class="tech"
-      *ngFor="let tech of technologies"
-      (click)="onFilterTech(tech)">
-      <div
-        matRipple
-        class="filter-btn waves-effect"
-        [ngClass]="isActiveBtn(tech.name)"
+    <div class="tech" *ngFor="let tech of technologies" (click)="onFilterTech(tech)">
+      <div matRipple class="filter-btn waves-effect" [ngClass]="isActiveBtn(tech.name)"
         [style.background]="tech.background">
         <img [src]="tech.icon" alt="tech.name" />
       </div>
       <span>{{ tech.name }}</span>
     </div>
-    <div
-      class="tech"
-      *ngIf="addedTech"
-      (click)="onFilterTech(addedTech)">
-      <div
-        matRipple
-        class="filter-btn waves-effect"
-        [ngClass]="isActiveBtn(addedTech.name)"
+    <div class="tech" *ngIf="addedTech" (click)="onFilterTech(addedTech)">
+      <div matRipple class="filter-btn waves-effect" [ngClass]="isActiveBtn(addedTech.name)"
         [style.background]="addedTech.background">
         <img [src]="addedTech.icon" alt="addedTech.name" />
       </div>
       <span>{{ addedTech.name }}</span>
     </div>
-    <div
-      class="filter-btn more"
-      (click)="onShow = !onShow"
-      (clickOutside)="onShow = false">
+    <div class="filter-btn more" (click)="onShow = !onShow" (clickOutside)="onShow = false">
       <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
-        <div
-          class="tech other-option"
-          *ngFor="let otherOption of otherTechnologies"
+        <div class="tech other-option" *ngFor="let otherOption of otherTechnologies"
           (click)="onFilterTech(otherOption)">
-          <div
-            matRipple
-            class="filter-btn waves-effect"
-            [ngClass]="isActiveBtn(otherOption.name)"
+          <div matRipple class="filter-btn waves-effect" [ngClass]="isActiveBtn(otherOption.name)"
             [style.background]="otherOption.background">
             <img [src]="otherOption.icon" alt="tech.name" />
           </div>
@@ -59,35 +35,26 @@
       </div>
     </div>
     <div class="right-dropdowns">
-      <div
-        class="filter-btn dropdown"
-        (click)="onShowSalary($event)"
-        (clickOutside)="isShowSalary = false"
+      <div class="filter-btn dropdown" (click)="onShowSalary($event)" (clickOutside)="isShowSalary = false"
         [ngClass]="{ active: currentValueSalary !== '$ Salary' }">
-        {{ currentValueSalary }} <mat-icon>arrow_drop_down </mat-icon>
+        {{ currentValueSalary }} <mat-icon>keyboard_arrow_down </mat-icon>
         <div class="other-option range" *ngIf="isShowSalary">
           <div>Choose your salary</div>
-          <ng5-slider
-            [(value)]="value"
-            [(highValue)]="highValue"
-            [options]="options"
-            (userChangeEnd)="onChooseSalary()"
-          ></ng5-slider>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options"
+            (userChangeEnd)="onChooseSalary()"></ng5-slider>
         </div>
       </div>
-
-      <div matRipple class="filter-btn dropdown waves-effect exp" [ngClass]="{active: expSelect.value}">
+      <div class="filter-btn dropdown" [ngClass]="{active: selectedExp !== 'all'}" (click)="onShowExp = !onShowExp"
+        (clickOutside)="onShowExp = false">
         <mat-icon>trending_up</mat-icon>
-        <mat-select [placeholder]="'Exp. level'" class="dropdown-select" #expSelect (selectionChange)="onFilterExp($event.value)">
-          <mat-option matRipple class="other-option"
-            >All</mat-option>
-          <mat-option matRipple class="other-option" [value]="'Junior'">
-            Junior</mat-option>
-          <mat-option matRipple class="other-option" [value]="'Mid'"
-            >Mid</mat-option>
-          <mat-option matRipple class="other-option" [value]="'Senior'"
-            >Senior</mat-option>
-        </mat-select>
+        <span *ngIf="selectedExp === 'all'"> Exp. level </span>
+        <span *ngIf="selectedExp !== 'all'"> {{ selectedExp | titlecase }} </span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+        <div class="other-options exp" [ngClass]="{ show: onShowExp }">
+          <div matRipple class="other-option" *ngFor="let expOption of expOptions" (click)="onFilterExp(expOption)">
+            {{ expOption | titlecase }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -95,11 +62,7 @@
 
 <app-filters-mobile *ngIf="!isDesktopWidth">
   <mat-select class="filter-select" [(value)]="selectedTech" (selectionChange)="onFilterTech($event.value)">
-    <mat-option
-      matRipple
-      class="mobile-option"
-      *ngFor="let tech of allTechnologies"
-      [value]="tech">
+    <mat-option matRipple class="mobile-option" *ngFor="let tech of allTechnologies" [value]="tech">
       {{ tech }}
     </mat-option>
   </mat-select>
