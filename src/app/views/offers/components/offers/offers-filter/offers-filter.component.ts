@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { Subscription } from 'rxjs';
 import { ResizeService } from '../../../../../shared/services';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offers-filter',
@@ -16,9 +16,10 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
   technologies: any[];
   otherTechnologies: any[];
   allTechnologies: string[];
-  indexTech;
-  value = 0;
-  highValue = 51000;
+
+  expOptions = ['all', 'junior', 'mid', 'senior'];
+  value: number;
+  highValue: number;
   options: Options = {
     floor: 0,
     ceil: 51000,
@@ -31,19 +32,40 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     }
   };
 
-  addedTech;
   onShow = false;
   isShowSalary = false;
+  onShowExp = false;
   currentValueSalary: string;
-
-  selectedTech;
+  addedTech: string | {};
+  selectedTech: string;
   selectedExp: string;
 
   public isDesktopWidth = window.innerWidth > 1024 ? true : false;
   private resizeSubscription: Subscription;
 
-  constructor(private resizeService: ResizeService,
-              private filterService: FilterService) {}
+  constructor(
+    private resizeService: ResizeService,
+    private filterService: FilterService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.technologies = this.filterService.technologies;
+    this.otherTechnologies = this.filterService.otherTechnologies;
+    this.allTechnologies = this.filterService.allTechnologies;
+
+    this.selectedTech = this.filterService.selectedTech;
+    this.selectedExp = this.filterService.selectedExp;
+    this.value = this.changeSelectedSalaryToNumber(this.filterService.selectedMinSal);
+    this.highValue = this.changeSelectedSalaryToNumber(this.filterService.selectedMaxSal);
+
+    this.resizeSubscription = this.resizeService.onResize$.subscribe(size => {
+      this.isDesktopWidth = size.innerWidth > 1024 ? true : false;
+    });
+
+    this.updateAddedTech();
+    this.currentValueSalary = this.signCurrentValue();
+  }
 
   signCurrentValue() {
     if (this.value === this.options.floor && this.highValue === this.options.ceil) {
@@ -64,26 +86,8 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     this.isShowSalary = !this.isShowSalary;
   }
 
-  ngOnInit() {
-    this.resizeSubscription = this.resizeService.onResize$
-      .subscribe(size => {
-        this.isDesktopWidth = size.innerWidth > 1024 ? true : false;
-      });
-    if (sessionStorage.getItem('selectedTech') === null) {
-      this.selectedTech = 'All';
-    } else {
-      this.selectedTech = JSON.parse(sessionStorage.getItem('selectedTech'));
-    }
-    if (sessionStorage.getItem('addedTech') !== null) {
-      this.addedTech = JSON.parse(sessionStorage.getItem('addedTech'));
-    }
-
-    this.technologies = this.filterService.technologies;
-    this.otherTechnologies = this.filterService.otherTechnologies;
-    this.allTechnologies = this.filterService.allTechnologies;
-    this.currentValueSalary = this.signCurrentValue();
-
-
+  changeSelectedSalaryToNumber(s): number {
+    return s = (+[s.slice(0, s.length - 1)] * 1000);
   }
 
   onFilterTech(tech) {
@@ -92,34 +96,38 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     } else {
       this.selectedTech = tech;
     }
-    // this.filterService.selectedTech = this.selectedTech;
-    this.indexTech = this.allTechnologies.findIndex(item => item === this.selectedTech);
-    if (this.indexTech > this.technologies.length) {
-      this.addedTech = this.otherTechnologies[this.indexTech - this.technologies.length - 1];
-      sessionStorage.setItem('addedTech', JSON.stringify(this.addedTech));
-    }
-    sessionStorage.setItem('selectedTech', JSON.stringify(this.selectedTech));
-    this.filterService.onFilter();
-
+    this.filterService.selectedTech = this.selectedTech;
+    this.filterService.onNavigateByFilter();
+    this.updateAddedTech();
   }
 
-  onFilterExp(exp) {
-    this.selectedExp = exp ? exp : 'All';
-    this.filterService.selectedExp = this.selectedExp;
-    this.filterService.onFilter();
+  updateAddedTech() {
+    const indexTech = this.allTechnologies.findIndex(
+      item => item.toLowerCase() === this.selectedTech.toLowerCase()
+    );
+    if (indexTech > this.technologies.length) {
+      this.addedTech = this.otherTechnologies[indexTech - this.technologies.length - 1];
+    }
+  }
+
+  onFilterExp(exp: string) {
+    this.selectedExp = exp;
+    this.filterService.selectedExp = exp;
+    this.filterService.onNavigateByFilter();
   }
 
   onChooseSalary() {
     this.currentValueSalary = this.signCurrentValue();
     this.filterService.selectedMinSal = this.value / 1000 + 'k';
     this.filterService.selectedMaxSal = this.highValue / 1000 + 'k';
-    this.filterService.onFilter();
+    this.filterService.onNavigateByFilter();
   }
 
   isActiveBtn(tech) {
-    if (tech === this.selectedTech) {
+    if (tech.toLowerCase() === this.selectedTech.toLowerCase()) {
       return 'active';
-    } else if (tech !== this.selectedTech && this.selectedTech !== 'All') {
+    } else if (
+      tech.toLowerCase() !== this.selectedTech.toLowerCase() && this.selectedTech !== 'All' ) {
       return 'inactive';
     }
   }
@@ -128,9 +136,5 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
     if (this.resizeSubscription) {
       this.resizeSubscription.unsubscribe();
     }
-    sessionStorage.removeItem('selectedTech');
-    sessionStorage.removeItem('addedTech');
-    sessionStorage.removeItem('selectedPlace');
   }
 }
-
