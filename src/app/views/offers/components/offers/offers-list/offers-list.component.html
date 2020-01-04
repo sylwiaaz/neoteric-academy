@@ -1,8 +1,12 @@
 <div class="offers-list-container">
-  <app-offers-item
-    *ngFor="let item of offers; let i = index"
-    [offer]="item"
-    [index]="i"
-  >
-</app-offers-item>
+  <div *ngIf="offers">
+    <app-offers-item *ngFor="let item of offers" [offer]="item" [index]="item._id">
+    </app-offers-item>
+  </div>
+  <div *ngIf="offers !== undefined && offers.length === 0" class="no-offers-container">
+    <p class="notfound-message">{{ message }}</p>
+    <div class="btn-rounded remove-btn waves-effect" (click)="onRemoveFilters()">
+      REMOVE FILTERS
+    </div>
+  </div>
 </div>
