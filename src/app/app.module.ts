@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { UserModule } from './views/user/user.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './views/auth/auth.module';
 import { BrandsModule } from './views/brands/brands.module';
 import { OffersModule } from './views/offers/offers.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     UserModule
   ],
   providers: [
-    CoreGuards
+    CoreGuards, CookieService
   ],
   bootstrap: [AppComponent]
 })
