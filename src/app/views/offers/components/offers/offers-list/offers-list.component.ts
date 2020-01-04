@@ -1,6 +1,7 @@
+import { FilterService } from 'src/app/views/offers/services';
+import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfferService } from '../../../services';
-import { Offer } from '../../../services/offer.model';
 
 @Component({
   selector: 'app-offers-list',
@@ -8,16 +9,27 @@ import { Offer } from '../../../services/offer.model';
   styleUrls: ['./offers-list.component.scss']
 })
 export class OffersListComponent implements OnInit, OnDestroy {
-  offers: Offer[];
+  offers;
+  message: string;
+  private offersSub: Subscription;
 
-  constructor(private offerService: OfferService) {
-    this.offerService.getOffers().subscribe((offers) => {
-      this.offers = offers;
-    });
+  constructor(private offerService: OfferService, private filterService: FilterService) { }
+
+  ngOnInit() {
+    this.offersSub = this.offerService.getOffersListener()
+      .subscribe(offers => {
+        if (offers.length === 0) {
+          this.message = 'Sorry, there is no job offers.';
+        }
+        this.offers = offers;
+      });
   }
 
-  ngOnInit() { }
+  onRemoveFilters() {
+    this.filterService.onClearFilters();
+  }
 
-
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this.offersSub.unsubscribe();
+  }
 }
