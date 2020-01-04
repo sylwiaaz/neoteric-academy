@@ -1,4 +1,4 @@
-<div class="offer-detail">
+<div class="offer-detail" *ngIf="offer">
   <div class="offer-header">
     <div class="background" [ngClass]="offer.tech">
       <button class="back waves-effect" (click)="onNavigateBack()">
