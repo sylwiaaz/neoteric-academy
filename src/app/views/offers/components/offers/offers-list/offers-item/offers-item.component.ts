@@ -11,7 +11,7 @@ export class OffersItemComponent implements OnInit {
   appRouterUrls = AppRouterUrls;
 
   @Input() offer: Offer;
-  @Input() index: number;
+  @Input() index: string;
   constructor() { }
 
   ngOnInit() {
