@@ -15,17 +15,10 @@ export class FiltersMobileComponent implements OnInit {
     this.selectedPlace = this.filterService.selectedPlace;
   }
 
-  ngOnInit() {
-    if (sessionStorage.getItem('selectedPlace') === null) {
-      this.selectedPlace = 'All';
-    } else {
-      this.selectedPlace = JSON.parse(sessionStorage.getItem('selectedPlace'));
-    }
-  }
+  ngOnInit() { }
 
-  onFilterPlace(place) {
+  onFilterPlace(place: string) {
     this.filterService.selectedPlace = place;
-    sessionStorage.setItem('selectedPlace', JSON.stringify(place));
-    this.filterService.onFilter();
+    this.filterService.onNavigateByFilter();
   }
 }
