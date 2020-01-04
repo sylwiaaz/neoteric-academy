@@ -36,7 +36,7 @@ export class OffersFilterComponent implements OnInit, OnDestroy {
   isShowSalary = false;
   onShowExp = false;
   currentValueSalary: string;
-  addedTech: string | {};
+  addedTech: any;
   selectedTech: string;
   selectedExp: string;
 
