@@ -45,14 +45,10 @@ export class BrandsViewComponent implements OnInit, OnDestroy {
       } else {
         this.isDesktopWidth = false;
       }
-      console.log(this.isDesktopWidth);
     });
   }
 
-  ngOnInit() {
-
-  }
-
+  ngOnInit() { }
   ngOnDestroy() {
     if (this.resizeSubscription) {
       this.resizeSubscription.unsubscribe();
