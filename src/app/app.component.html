@@ -1,7 +1,7 @@
 <app-navigation-menu *ngIf="isDesktopWidth">
-<ng-content></ng-content>
+  <ng-content></ng-content>
 </app-navigation-menu>
 <app-mobile-menu *ngIf="!isDesktopWidth">
-<ng-content></ng-content>
+  <ng-content></ng-content>
 </app-mobile-menu>
 <router-outlet></router-outlet>
