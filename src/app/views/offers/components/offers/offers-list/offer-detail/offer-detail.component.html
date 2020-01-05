@@ -15,7 +15,10 @@
         </div>
         <div class="company-info">
           <div class="salary">{{ offer.salary }}</div>
-          <div class="job-title">{{ offer.jobTitle }}</div>
+          <div class="job-title">
+            {{ offer.jobTitle }}
+          <span *ngIf="offer.remote" class="remote">Remote</span>
+          </div>
           <div class="address">{{ offer.companyAddress }}</div>
         </div>
         <button class="btn-rounded apply-btn waves-effect">
