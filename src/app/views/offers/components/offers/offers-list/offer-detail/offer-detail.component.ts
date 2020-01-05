@@ -2,8 +2,7 @@ import { Offer } from './../../../../services/offer.model';
 import { MapService } from './../../../../services';
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../../../../services';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AppRouterUrls } from '../../../../../../app-routing.config';
+import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
