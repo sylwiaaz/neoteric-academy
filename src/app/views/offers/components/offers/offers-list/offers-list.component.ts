@@ -19,7 +19,7 @@ export class OffersListComponent implements OnInit, OnDestroy {
     this.offersSub = this.offerService.getOffersListener()
       .subscribe(offers => {
         if (offers.length === 0) {
-          this.message = 'Sorry, there is no job offers.';
+          this.message = this.offerService.errorMessage;
         }
         this.offers = offers;
       });
