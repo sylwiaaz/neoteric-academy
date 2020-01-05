@@ -12,10 +12,11 @@ export class FiltersMobileComponent implements OnInit {
 
   constructor(private filterService: FilterService) {
     this.places = this.filterService.allPlaces;
-    this.selectedPlace = this.filterService.selectedPlace;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.selectedPlace = this.filterService.selectedPlace;
+  }
 
   onFilterPlace(place: string) {
     this.filterService.selectedPlace = place;
