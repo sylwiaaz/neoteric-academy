@@ -28,6 +28,7 @@ export class OfferDetailComponent implements OnInit {
       this.offerService.getOffer(this.id)
         .subscribe(offer => {
           this.offer = offer;
+          this.offerService.offersSubject.next([this.offer]);
           this.mapService.zoomToPlace(this.offer.location);
         });
     });
