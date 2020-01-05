@@ -11,7 +11,8 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './views/auth/auth.module';
 import { BrandsModule } from './views/brands/brands.module';
 import { OffersModule } from './views/offers/offers.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './views/auth/services';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { HttpClientModule } from '@angular/common/http';
     UserModule
   ],
   providers: [
-    CoreGuards, CookieService
+    CoreGuards, CookieService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+      }
   ],
   bootstrap: [AppComponent]
 })
