@@ -132,7 +132,6 @@ export class FilterService {
     'Wrocław',
     'Poznań',
     'Trójmiasto',
-    'Remote',
     'World'
   ];
   otherPlaces = [
@@ -153,53 +152,33 @@ export class FilterService {
   ];
   allPlaces = [...this.places, ...this.otherPlaces];
 
-  selectedPlace: string;
-  selectedTech: string;
-  selectedExp: string;
-  selectedMinSal: string;
-  selectedMaxSal: string;
+  selectedPlace = 'All';
+  selectedTech = 'All';
+  selectedExp = 'all';
+  selectedMinSal = '0k';
+  selectedMaxSal = '51k';
 
   constructor(private router: Router, private offerService: OfferService) {
     this.router.events.subscribe(events => {
       if (events instanceof NavigationEnd) {
-
         const urlParams = decodeURIComponent(this.router.url).split('/');
-        const [slashSeg, offerSegment, placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg] = urlParams;
-        if (urlParams.length === 2 && offerSegment === 'offers') {
-          this.offerService.getOffers();
+
+        // check if url is : '/offers/place/tech ..'
+        if (urlParams[1] === 'offers' && urlParams[2] !== 'offer') {
+          const [slashSeg, offerSegment, placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg] = urlParams;
+          if (urlParams.length === 2 && offerSegment === 'offers') {
+            this.offerService.getOffers();
+          }
+          this.offerService.getOffersByFilter(placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg);
+          this.setFilters(placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg);
         }
-        this.onFilter(placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg);
-        this.setFilters(placeSeg, techSeg, expSeg, minSalSeg, maxSalSeg);
       }
     });
-  }
-
-  onFilter(place, tech?, exp?, minSal?, maxSal?) {
-    if (maxSal) {
-      this.offerService.getOffersByAllFilters(place, tech, exp, minSal, maxSal);
-    } else {
-      if (minSal) {
-        this.offerService.getOffersByMinSal(place, tech, exp, minSal);
-      } else {
-        if (exp) {
-          this.offerService.getOffersByExp(place, tech, exp);
-        } else {
-          if (tech) {
-            this.offerService.getOffersByPlaceAndTech(place, tech);
-          } else {
-            if (place) {
-              this.offerService.getOffersByPlace(place);
-            }
-          }
-        }
-      }
-    }
   }
 
   capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
-
 
   onNavigateByFilter() {
     if (this.router.url.includes('offers')) {
