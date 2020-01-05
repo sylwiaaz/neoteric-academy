@@ -50,7 +50,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData = { email, password };
-    this.http.post<any>(`${this.serverPath}auth/login`, authData, { withCredentials: true })
+    this.http.post<any>(`${this.serverPath}auth/login`, authData)
       .subscribe((response) => {
         // this.currentUserEmail = response.updatedUser.email;
         // const value = response.updatedUser.token;
@@ -72,12 +72,14 @@ export class AuthService {
 
   logout() {
     this.http.post(`${this.serverPath}auth/logout`, { withCredentials: true })
-      .subscribe((response) => { },
-        error => {
-          this.isAuthenticated = false;
-          this.cookieService.deleteAll('/');
-          this.authStatusListener.next(false);
-          this.router.navigate(['']);
+      .subscribe((response) => {
+        this.isAuthenticated = false;
+        this.cookieService.deleteAll('/');
+        this.authStatusListener.next(false);
+        this.snackBarService.showSuccess('You have logged out successfully.');
+        this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/offers']);
         });
+      });
   }
 }
