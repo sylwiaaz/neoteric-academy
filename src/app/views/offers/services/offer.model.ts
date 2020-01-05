@@ -14,4 +14,5 @@ export interface Offer {
   experienceLevel: string;
   techStack: string[];
   location: number[];
+  remote: boolean;
 }
