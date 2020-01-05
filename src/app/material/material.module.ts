@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 // in this module we import every angular material module
 @NgModule({
   imports: [
@@ -30,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule
@@ -40,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
     MatListModule,
     LayoutModule,
+    MatTooltipModule,
     MatSlideToggleModule,
     Ng5SliderModule,
     MatRippleModule,
