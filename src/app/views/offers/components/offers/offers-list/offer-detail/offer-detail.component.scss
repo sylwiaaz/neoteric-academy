@@ -90,6 +90,18 @@
       font-size: 22px;
       font-weight: 600;
     }
+
+    .remote {
+      margin-left: 10px;
+      font-weight: 300;
+      font-size: 11px;
+      background-color: #fff;
+      color: #448aff;
+      padding: 5px 10px;
+      border-radius: 10px;
+      vertical-align: bottom;
+      line-height: 33px;
+    }
   }
 
   .apply-btn {
@@ -400,6 +412,13 @@ mat-form-field.mat-form-field {
       .mat-icon {
         font-size: 32px;
         transform: translateX(-25%);
+      }
+    }
+    .company-info {
+      margin-left: 20px;
+      .salary,
+      .address {
+        font-size: 15px;
       }
     }
   }
