@@ -14,14 +14,6 @@
       (click)="onChoosePlace(isAddedPlace)">
       {{ isAddedPlace }}
     </div>
-    <div matRipple
-    class="filter-btn waves-effect"
-    [ngClass]="{ active: selectedPlace === 'Remote' }"
-    (click)="onChoosePlace('Remote')"
-    matTooltip="Click to see all remote job offers"
-    matTooltipPosition="right">
-      Remote
-    </div>
     <div class="filter-btn more wave-effect" (click)="onShow = !onShow" (clickOutside)="onShow = false">
       <mat-icon matRipple>more_horiz</mat-icon>
       <div class="other-options" [ngClass]="{ show: onShow }">
