@@ -1,4 +1,4 @@
-<a class="offer-item" [routerLink]="[appRouterUrls.OFFER, index]">
+<a class="offer-item" [routerLink]="(offer.premium) ? [appRouterUrls.OFFER, index, {premium : true}] : [appRouterUrls.OFFER, index]">
  <div class="offer-border-left" [ngClass]="offer.tech"></div>
   <div class="company-logo-container">
     <img
@@ -9,6 +9,8 @@
   <div class="row">
     <div class="first-line">
       <span class="job-title">{{ offer.jobTitle }}</span>
+      <span *ngIf="offer.remote === 'true'" class="remote">Remote</span>
+      <span *ngIf="offer.premium" class="remote">Premium</span>
       <div class="right-content">
         <span class="salary">{{ offer.salary }}</span>
         <span class="date" [ngClass]="{'new': offer.date === 'new'}">{{ offer.date }}</span>
