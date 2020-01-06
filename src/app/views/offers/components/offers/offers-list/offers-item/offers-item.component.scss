@@ -64,6 +64,17 @@
     font-weight: 600;
   }
 
+  .remote {
+    font-size: 11px;
+    margin: 0 5px 0 0;
+    vertical-align: text-bottom;
+    padding: 4px 7px;
+    border-radius: 16px;
+    white-space: nowrap;
+    line-height: 11px;
+    border: 1px solid #e0e0e0;
+  }
+
   .right-content {
     margin-left: auto;
     display: flex;
