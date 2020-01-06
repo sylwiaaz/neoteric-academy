@@ -1,4 +1,11 @@
-<div class="offer-detail" *ngIf="offer">
+<div class="offer-container">
+<mat-progress-spinner *ngIf="isLoading"
+[color]="'accent'"
+[mode]="'indeterminate'"
+[diameter] = '150'
+>
+</mat-progress-spinner>
+<div class="offer-detail" *ngIf="offer && !isLoading">
   <div class="offer-header">
     <div class="background" [ngClass]="offer.tech">
       <button class="back waves-effect" (click)="onNavigateBack()">
@@ -17,7 +24,8 @@
           <div class="salary">{{ offer.salary }}</div>
           <div class="job-title">
             {{ offer.jobTitle }}
-          <span *ngIf="offer.remote" class="remote">Remote</span>
+          <span *ngIf="offer.remote === 'true'" class="remote">Remote</span>
+          <span *ngIf="offer.premium" class="remote">Premium</span>
           </div>
           <div class="address">{{ offer.companyAddress }}</div>
         </div>
@@ -188,4 +196,12 @@
       </div>
     </div>
   </div>
+</div>
+<!-- <div *ngIf="!offer">{{errorMessage}}</div> -->
+<div *ngIf="!offer && !isLoading" class="no-offers-container">
+  <p class="notfound-message">{{ errorMessage }}</p>
+  <div class="btn-rounded login-btn waves-effect" (click)="onLogin()">
+    Login
+  </div>
+</div>
 </div>
