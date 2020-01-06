@@ -29,6 +29,10 @@ export class OfferService {
     return this.http.get<Offer>(`${this.mainPath}offer/${index}`);
   }
 
+  getPremiumOffer(index: string) {
+    return this.http.get<Offer>(`${this.mainPath}offer/${index}/premium`);
+  }
+
   getOffersByFilter(place?, tech?, exp?, minSal?, maxSal?) {
     let pathAPI;
     if (maxSal) {
@@ -44,16 +48,13 @@ export class OfferService {
             pathAPI = `${this.mainPath}${place}/${tech}`;
           } else {
             if (place) {
-              if (place === 'remote') {
-                pathAPI = `http://localhost:5000/remote`;
-              } else {
-                pathAPI = `${this.mainPath}${place}`;
-              }
+              pathAPI = `${this.mainPath}${place}`;
             }
           }
         }
       }
     }
+
 
     return this.http.get<Offer[]>(pathAPI).subscribe(
       offers => {
