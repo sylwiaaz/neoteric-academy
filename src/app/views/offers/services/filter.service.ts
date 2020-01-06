@@ -132,6 +132,7 @@ export class FilterService {
     'Wrocław',
     'Poznań',
     'Trójmiasto',
+    'Remote',
     'World'
   ];
   otherPlaces = [
