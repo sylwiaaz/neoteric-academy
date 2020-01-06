@@ -14,6 +14,7 @@ export class MapService implements OnDestroy {
   map;
   offers: Offer[];
   offersSub: Subscription;
+
   constructor(private router: Router, private offerService: OfferService) { }
 
   initMap(): void {
@@ -45,7 +46,11 @@ export class MapService implements OnDestroy {
           marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
           marker.addTo(this.map);
           marker.on('click', () => {
-            this.router.navigate([`offers/offer/${offer._id}`]);
+            if (offer.remote) {
+              this.router.navigate([`offers/offer/${offer._id}`, {premium: true}]);
+            } else {
+               this.router.navigate([`offers/offer/${offer._id}`]);
+            }
           });
         });
       });
