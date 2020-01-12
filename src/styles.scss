@@ -134,6 +134,7 @@ ul {
 
 .mat-drawer-backdrop.mat-drawer-shown {
   z-index: 9;
+  position: fixed;
 }
 
 .other-options {
