@@ -5,7 +5,6 @@ import { OfferService } from './offer-service.service';
 import { Subscription } from 'rxjs';
 import { Offer } from './offer.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -46,7 +45,7 @@ export class MapService implements OnDestroy {
           marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
           marker.addTo(this.map);
           marker.on('click', () => {
-            if (offer.remote) {
+            if (offer.premium) {
               this.router.navigate([`offers/offer/${offer._id}`, {premium: true}]);
             } else {
                this.router.navigate([`offers/offer/${offer._id}`]);
