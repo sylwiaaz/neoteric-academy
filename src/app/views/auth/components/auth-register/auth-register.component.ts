@@ -19,7 +19,7 @@ export class AuthRegisterComponent implements OnInit {
       email: new FormControl(null, [Validators.required,
       Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      termAccept: new FormControl(null, Validators.required)
+      termAccept: new FormControl(null, Validators.requiredTrue)
     });
   }
 
