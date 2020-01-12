@@ -20,6 +20,7 @@ export class OfferDetailComponent implements OnInit {
   isInvalidForm: boolean;
   errorMessage: string;
   isLoading = false;
+  isInvalidIdOffer = false;
 
   constructor(private offerService: OfferService,
               private router: Router,
@@ -44,6 +45,7 @@ export class OfferDetailComponent implements OnInit {
       }, error => {
         this.isLoading = false;
         this.errorMessage = error.error.message;
+        this.isInvalidIdOffer = this.errorMessage === 'Please enter a valid offer id' ? true : false;
         this.offerService.offersSubject.next([]);
       });
     });
