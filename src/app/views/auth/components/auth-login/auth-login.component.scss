@@ -153,6 +153,7 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   color: rgb(135, 152, 173);
   font-size: 14px;
 }
+
 .mat-checkbox.red {
   .link,
   /deep/ .mat-checkbox-label {
@@ -174,11 +175,11 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
 
 @media (min-width: 769px) and (max-width: 1056px) {
   .login-img {
-    width: 37%;
+    width: 30%;
   }
 
   .login {
-    width: 63%;
+    width: 70%;
     padding: 50px 25px 75px;
 
     a {
@@ -201,7 +202,7 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
     padding: 50px 3vw 75px;
 
     a {
-      flex-basis: 100%;
+      flex-basis: 65%;
       margin: 8px 0;
     }
 
@@ -220,7 +221,7 @@ form /deep/ .mat-form-field.mat-focused .mat-form-field-label {
   .login {
     padding: 32px 15px;
     a {
-      flex-basis: 90%;
+      flex-basis: 85%;
     }
   }
 }
