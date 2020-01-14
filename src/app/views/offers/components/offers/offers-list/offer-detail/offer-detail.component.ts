@@ -1,4 +1,3 @@
-import { FilterService } from './../../../../services/filter.service';
 import { Offer } from './../../../../services/offer.model';
 import { MapService } from './../../../../services';
 import { Component, OnInit } from '@angular/core';
@@ -73,7 +72,13 @@ export class OfferDetailComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
-  onBackToList() {
+  onBackToPreviousUrl() {
     this.location.back();
+  }
+
+  onBackToList() {
+    this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/offers']);
+    });
   }
 }
