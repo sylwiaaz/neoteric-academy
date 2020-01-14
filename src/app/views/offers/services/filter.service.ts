@@ -9,7 +9,7 @@ import { OfferService } from './offer-service.service';
 
 export class FilterService {
   appRouterUrls = AppRouterUrls;
-  assetsPath = '../../../../../assets/images/';
+  assetsPath = './assets/images/';
   technologies = [
     {
       name: 'JS',
