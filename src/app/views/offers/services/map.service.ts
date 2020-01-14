@@ -33,7 +33,7 @@ export class MapService implements OnDestroy {
         offers.forEach((offer) => {
           const lat = offer.location[0];
           const lng = offer.location[1];
-          const logoPath = `../../../../../../assets/images/${offer.logoPath}`;
+          const logoPath = `./assets/images/${offer.logoPath}`;
 
           const customIcon = L.icon({
             iconUrl: logoPath,
