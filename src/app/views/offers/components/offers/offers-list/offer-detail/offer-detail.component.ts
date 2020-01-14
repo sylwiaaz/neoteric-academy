@@ -1,3 +1,4 @@
+import { FilterService } from './../../../../services/filter.service';
 import { Offer } from './../../../../services/offer.model';
 import { MapService } from './../../../../services';
 import { Component, OnInit } from '@angular/core';
@@ -26,6 +27,7 @@ export class OfferDetailComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private mapService: MapService,
+              private filterService: FilterService,
               private location: Location) {
     this.route.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -45,7 +47,8 @@ export class OfferDetailComponent implements OnInit {
       }, error => {
         this.isLoading = false;
         this.errorMessage = error.error.message;
-        this.isInvalidIdOffer = this.errorMessage === 'Please enter a valid offer id' ? true : false;
+        this.isInvalidIdOffer = this.errorMessage === 'Please enter a valid offer id.' ? true : false;
+        console.log(this.isInvalidIdOffer);
         this.offerService.offersSubject.next([]);
       });
     });
@@ -70,5 +73,9 @@ export class OfferDetailComponent implements OnInit {
 
   onLogin() {
     this.router.navigate(['/auth/login']);
+  }
+
+  onRemoveFilters() {
+    this.filterService.onClearFilters();
   }
 }
