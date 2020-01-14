@@ -7,7 +7,6 @@ export const AppRoutes = {
   DEFAULT: 'offers',
   AUTH: 'auth',
   LOGIN: 'login',
-  // LOGOUT: 'logout',
   BRANDS: 'brands',
   REGISTER: 'register',
   DASHBOARD: 'dashboard',
@@ -27,7 +26,6 @@ export const AppRoutes = {
 export const AppRouterLinks = {
   DEFAULT: [AppRoutes.DEFAULT],
   LOGIN: [AppRoutes.AUTH, AppRoutes.LOGIN],
-  // LOGOUT: [AppRoutes.AUTH, AppRoutes.LOGOUT],
   BRANDS: [AppRoutes.BRANDS],
   DASHBOARD: [AppRoutes.DASHBOARD],
   PROFILE: [AppRoutes.DASHBOARD, AppRoutes.PROFILE],
@@ -46,7 +44,6 @@ export const AppRouterLinks = {
 export const AppRouterUrls = {
   DEFAULT: `/${AppRoutes.DEFAULT}`,
   LOGIN: `/${AppRoutes.AUTH}/${AppRoutes.LOGIN}`,
-  // LOGOUT: `/${AppRoutes.AUTH}/${AppRoutes.LOGOUT}`,
   BRANDS: `/${AppRoutes.BRANDS}`,
   DASHBOARD: `/${AppRoutes.DASHBOARD}`,
   PROFILE: `/${AppRoutes.DASHBOARD}/${AppRoutes.PROFILE}`,

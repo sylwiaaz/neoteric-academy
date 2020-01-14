@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class IsAuthenticatedOnLoginGuard implements CanActivate {
-  // check if user is authenticated on login (check cookies)
 
   constructor(private router: Router, private cookieService: CookieService) { }
 

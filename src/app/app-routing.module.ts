@@ -8,7 +8,6 @@ import { OffersComponent, OfferDetailComponent, OffersListComponent } from './vi
 import { IsAuthenticatedOnLoginGuard, IsAuthenticatedGuard } from './guards';
 
 const routes: Routes = [
-  // odkomentować gdy dodasz komponent offers
   { path: '', redirectTo: AppRouterUrls.DEFAULT, pathMatch: 'full' },
   {
     path: AppRoutes.AUTH, canActivate: [IsAuthenticatedGuard],
@@ -44,7 +43,8 @@ const routes: Routes = [
       { path: AppRoutes.FILTERMINSAL, component: OffersListComponent },
       { path: AppRoutes.FILTERMAXSAL, component: OffersListComponent }
     ]
-  }];
+  },
+  { path: '**', redirectTo: AppRouterUrls.DEFAULT }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class IsAuthenticatedGuard implements CanActivate {
-  // simple guard checking if user is authenticated
 
   constructor( private router: Router, private cookieService: CookieService ) { }
 

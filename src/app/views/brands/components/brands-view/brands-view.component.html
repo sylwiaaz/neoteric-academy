@@ -1,6 +1,5 @@
 <app-filters *ngIf="isDesktopWidth">
   <div class="filters-brands">
-    <!-- <div class="filter-btn wave-effect brand active">All</div> -->
     <div *ngFor="let typeBrand of typeBrands" class="filter-btn wave-effect brand" [ngClass]="{
       active: typeBrand.type === selectedBrand,
       inactive: typeBrand.type !== selectedBrand && selectedBrand !== 'All'
