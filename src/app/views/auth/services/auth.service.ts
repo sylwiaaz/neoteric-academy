@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 export class AuthService {
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
-  private serverPath = 'http://localhost:5000/';
+  private serverPath = 'https://angularapp-backend.herokuapp.com/';
   public currentUser;
   private currentUserEmail;
 
@@ -52,9 +52,6 @@ export class AuthService {
     const authData = { email, password };
     this.http.post<any>(`${this.serverPath}auth/login`, authData)
       .subscribe((response) => {
-        // this.currentUserEmail = response.updatedUser.email;
-        // const value = response.updatedUser.token;
-
         this.currentUserEmail = response.user.email;
         this.currentUser = this.currentUserEmail.substr(0, this.currentUserEmail.indexOf('@'));
         const value = response.tokenData.token;

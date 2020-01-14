@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 export class OfferService {
   offers: Offer[];
   offersSubject = new Subject<Offer[]>();
-  private mainPath = 'http://localhost:5000/offers/';
+  private mainPath = 'https://angularapp-backend.herokuapp.com/offers/';
   errorMessage: string;
 
   constructor(private http: HttpClient) { }
