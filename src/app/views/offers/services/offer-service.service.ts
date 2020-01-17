@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Offer } from './offer.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ import { Subject } from 'rxjs';
 export class OfferService {
   offers: Offer[];
   offersSubject = new Subject<Offer[]>();
-  private mainPath = 'https://angularapp-backend.herokuapp.com/offers/';
+  private mainPath = 'https://angularapp-backend.herokuapp.com/offers';
   errorMessage: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getOffersListener() {
     return this.offersSubject.asObservable();
@@ -26,29 +27,31 @@ export class OfferService {
   }
 
   getOffer(index: string) {
-    return this.http.get<Offer>(`${this.mainPath}offer/${index}`);
+    return this.http.get<Offer>(`${this.mainPath}/offer/${index}`);
   }
 
   getPremiumOffer(index: string) {
-    return this.http.get<Offer>(`${this.mainPath}offer/${index}/premium`);
+    return this.http.get<Offer>(`${this.mainPath}/offer/${index}/premium`);
   }
 
   getOffersByFilter(place?, tech?, exp?, minSal?, maxSal?) {
     let pathAPI;
     if (maxSal) {
-      pathAPI = `${this.mainPath}${place}/${tech}/${exp}/${minSal}/${maxSal}`;
+      pathAPI = `${this.mainPath}/${place}/${tech}/${exp}/${minSal}/${maxSal}`;
     } else {
       if (minSal) {
-        pathAPI = `${this.mainPath}${place}/${tech}/${exp}/${minSal}`;
+        pathAPI = `${this.mainPath}/${place}/${tech}/${exp}/${minSal}`;
       } else {
         if (exp) {
-          pathAPI = `${this.mainPath}${place}/${tech}/${exp}`;
+          pathAPI = `${this.mainPath}/${place}/${tech}/${exp}`;
         } else {
           if (tech) {
-            pathAPI = `${this.mainPath}${place}/${tech}`;
+            pathAPI = `${this.mainPath}/${place}/${tech}`;
           } else {
             if (place) {
-              pathAPI = `${this.mainPath}${place}`;
+              pathAPI = `${this.mainPath}/${place}`;
+            }  else {
+              pathAPI = `${this.mainPath}`;
             }
           }
         }
@@ -68,5 +71,13 @@ export class OfferService {
         }
       }
     );
+  }
+
+  postJobOffer(offerData: Offer) {
+    return this.http.post<Offer>(this.mainPath, offerData)
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate([`/offers/offer/${response._id}`]);
+      });
   }
 }
