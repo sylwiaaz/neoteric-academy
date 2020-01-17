@@ -11,10 +11,10 @@ import { AuthService } from '../../../auth/services';
 export class UserPanelComponent implements OnInit {
   appRouterUrls = AppRouterUrls;
   currentUser: string;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.currentUser = this.authService.currentUser;
+    this.currentUser = localStorage.getItem('currentUser');
   }
 
   onLogout() {
