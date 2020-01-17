@@ -13,6 +13,7 @@ export class MapService implements OnDestroy {
   map;
   offers: Offer[];
   offersSub: Subscription;
+  marker;
 
   constructor(private router: Router, private offerService: OfferService) { }
 
@@ -46,9 +47,9 @@ export class MapService implements OnDestroy {
           marker.addTo(this.map);
           marker.on('click', () => {
             if (offer.premium) {
-              this.router.navigate([`offers/offer/${offer._id}`, {premium: true}]);
+              this.router.navigate([`offers/offer/${offer._id}`, { premium: true }]);
             } else {
-               this.router.navigate([`offers/offer/${offer._id}`]);
+              this.router.navigate([`offers/offer/${offer._id}`]);
             }
           });
         });
@@ -65,6 +66,15 @@ export class MapService implements OnDestroy {
     <span class="company-name">${offer.companyName}</span>
     </div>
     </div>`;
+  }
+
+  makeMarker(location) {
+    if (this.marker !== undefined) {
+      this.marker.setLatLng(location);
+    } else {
+      this.marker = L.circleMarker(location, { radius: 10 });
+      this.marker.addTo(this.map);
+    }
   }
 
   zoomOut() {
