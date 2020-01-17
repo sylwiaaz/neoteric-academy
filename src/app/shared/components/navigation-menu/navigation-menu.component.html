@@ -45,7 +45,7 @@
         </a>
       </mat-nav-list>
       <div class="menu-btns">
-        <a matRipple class="post-job btn-rounded">Post a job</a>
+        <a matRipple class="post-job btn-rounded" [routerLink]="appRouterUrls.ADDOFFER">Post a job</a>
         <a matRipple class="sign-in btn-rounded" [routerLink]="appRouterUrls.LOGIN" *ngIf="!isLogged">Sign in</a>
         <div class="sign-userbox" *ngIf="isLogged">
           <div class="user-dropdown-header" (click)="isOpenUserDropdown = !isOpenUserDropdown" (clickOutside)="isOpenUserDropdown = false">
