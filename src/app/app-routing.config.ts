@@ -20,7 +20,8 @@ export const AppRoutes = {
   FILTERTECH: ':place/:tech',
   FILTEREXP: ':place/:tech/:exp',
   FILTERMINSAL: ':place/:tech/:exp/:minSal',
-  FILTERMAXSAL: ':place/:tech/:exp/:minSal/:maxSal'
+  FILTERMAXSAL: ':place/:tech/:exp/:minSal/:maxSal',
+  ADDOFFER: 'add-offer'
 };
 
 export const AppRouterLinks = {
@@ -38,7 +39,8 @@ export const AppRouterLinks = {
   FILTERTECH: [AppRoutes.DEFAULT, AppRoutes.FILTERTECH],
   FILTEREXP: [AppRoutes.DEFAULT, AppRoutes.FILTEREXP],
   FILTERMINSAL: [AppRoutes.DEFAULT, AppRoutes.FILTERMINSAL],
-  FILTERMAXSAL: [AppRoutes.DEFAULT, AppRoutes.FILTERMAXSAL]
+  FILTERMAXSAL: [AppRoutes.DEFAULT, AppRoutes.FILTERMAXSAL],
+  ADDOFFER: [AppRoutes.ADDOFFER]
 };
 
 export const AppRouterUrls = {
@@ -57,5 +59,6 @@ export const AppRouterUrls = {
   FILTERTECH: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERTECH} `,
   FILTEREXP: `${AppRoutes.DEFAULT}/${AppRoutes.FILTEREXP} `,
   FILTERMINSAL: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERMINSAL} `,
-  FILTERMAXSAL: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERMAXSAL} `
+  FILTERMAXSAL: `${AppRoutes.DEFAULT}/${AppRoutes.FILTERMAXSAL} `,
+  ADDOFFER: `/${AppRoutes.ADDOFFER}`
 };

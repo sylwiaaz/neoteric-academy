@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppRouterUrls, AppRoutes } from './app-routing.config';
 import { AuthLoginComponent, AuthRegisterComponent } from './views/auth/components';
-import { OffersComponent, OfferDetailComponent, OffersListComponent } from './views/offers/components';
+import { OffersComponent, OfferDetailComponent, OffersListComponent, OfferAddFormComponent } from './views/offers/components';
 import { IsAuthenticatedOnLoginGuard, IsAuthenticatedGuard } from './guards';
 
 const routes: Routes = [
@@ -44,6 +44,7 @@ const routes: Routes = [
       { path: AppRoutes.FILTERMAXSAL, component: OffersListComponent }
     ]
   },
+  { path: AppRoutes.ADDOFFER, component: OfferAddFormComponent, canActivate: [IsAuthenticatedOnLoginGuard] },
   { path: '**', redirectTo: AppRouterUrls.DEFAULT }];
 
 @NgModule({
