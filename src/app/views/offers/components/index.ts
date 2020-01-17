@@ -4,6 +4,7 @@ import { OffersListComponent } from './offers/offers-list/offers-list.component'
 import { OffersMapComponent } from './offers/offers-map/offers-map.component';
 import { OffersItemComponent } from './offers/offers-list/offers-item/offers-item.component';
 import { OfferDetailComponent } from './offers/offers-list/offer-detail/offer-detail.component';
+import { OfferAddFormComponent } from './offers/offer-add-form/offer-add-form.component';
 
 export const OffersComponents = [
   OffersComponent,
@@ -11,7 +12,8 @@ export const OffersComponents = [
   OffersListComponent,
   OffersMapComponent,
   OffersItemComponent,
-  OfferDetailComponent
+  OfferDetailComponent,
+  OfferAddFormComponent
 ];
 
 export {
@@ -20,5 +22,6 @@ export {
   OffersListComponent,
   OffersMapComponent,
   OffersItemComponent,
-  OfferDetailComponent
+  OfferDetailComponent,
+  OfferAddFormComponent
 };
