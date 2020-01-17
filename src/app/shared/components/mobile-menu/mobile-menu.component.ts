@@ -31,11 +31,10 @@ export class MobileMenuComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLogged = this.authService.getIsAuth();
-    this.currentUser = this.authService.currentUser;
+    this.currentUser = localStorage.getItem('currentUser');
     this.authStatusSub = this.authService.getAuthStatus().subscribe(
       isAuth => {
         this.isLogged = isAuth;
-        this.currentUser = this.authService.currentUser;
       }
     );
 
