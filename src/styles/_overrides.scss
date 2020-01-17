@@ -45,15 +45,6 @@ button:hover {
   font-weight: 500;
 }
 
-.cdk-overlay-container {
-  .mat-select-panel {
-    max-height: 400px;
-  }
-
-  .cdk-overlay-pane {
-    transform: translateX(-25%) translateY(40px) !important;
-  }
-}
 
 @media (max-width: 1024px) {
   .cdk-overlay-container {
