@@ -1,0 +1,158 @@
+.offer-card-section {
+  background-color: #fff;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 2px 18px 10px rgba(225, 232, 240, 0.7);
+  overflow: hidden;
+  max-width: 900px;
+  padding: 20px;
+  margin: 75px auto 20px auto;
+}
+
+.input-field {
+  width: 300px;
+  margin: 10px 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.textarea-field {
+  margin: 5px auto;
+  width: 85%;
+}
+
+.offer-form-input {
+  width: 100%;
+}
+
+::ng-deep .mat-tooltip {
+  white-space: pre-line !important;
+  text-align: center;
+  opacity: 1;
+  background-color: #23292c;
+  font-size: 12px;
+}
+
+.offer-section {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.offer-section-header {
+  margin: 0 50px;
+  font-weight: bold;
+  font-size: 16.5px;
+  line-height: 40px;
+  color: #666;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.offer-map {
+  height: 300px;
+  width: 85%;
+  margin: 20px auto 0;
+}
+
+.tech-selection {
+  margin: 40px 30px 0;
+
+  .technologies {
+    margin: 10px 0;
+  }
+
+  .technologies.is-invalid {
+    border: solid red 1px;
+  }
+
+  .filters-tech {
+    width: 100%;
+    margin: 0 15px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-content: space-around;
+
+    .tech {
+      margin-top: 15px;
+      margin-right: 17px;
+    }
+  }
+}
+
+.label {
+  display: block;
+  text-align: center;
+}
+
+.label.invalid {
+  color: red;
+}
+
+.icon-help {
+  font-size: 15px;
+}
+
+.apply-action {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #ff4081;
+  color: #fff;
+  box-shadow: none;
+  text-transform: none;
+  font-weight: 600;
+  font-size: 14px;
+  height: 42px;
+  transition: 0.3s ease-out;
+  line-height: 42px;
+  padding: 0 2rem;
+  border: none;
+}
+
+.submit-btn:hover {
+  background-color: #ff5a92;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.invalid-info {
+  display: block;
+  margin: 10px auto;
+  color: #d50000;
+}
+
+mat-chip.skill-chip {
+  padding: 0 20px;
+  background-color: #ff5a92;
+  font-weight: 600;
+  color: white;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+::ng-deep .mat-form-field.offer-form-input.warn {
+  * {
+    color: red !important;
+  }
+
+  &.mat-focused .mat-form-field-ripple {
+    background-color: red !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: red;
+  }
+}

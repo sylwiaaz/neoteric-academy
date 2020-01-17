@@ -1,0 +1,351 @@
+<div class="offer-card-section">
+  <form class="offer-form" [formGroup]="offerAddForm" (ngSubmit)="onPostOffer()">
+    <div class="offer-section-header">
+      Offer information
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <input
+            matInput
+            maxlength="40"
+            #companyName
+            formControlName="companyName"
+            placeholder="Short company name *"
+          />
+          <mat-hint align="end">
+            {{ companyName.value?.length || 0 }}/40</mat-hint
+          >
+        <mat-error *ngIf="offerAddForm.get('companyName').hasError('required')">
+          Company name is required field.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <input matInput placeholder="Company size *" formControlName="companySize"/>
+          <mat-icon
+            class="icon-help"
+            matSuffix
+            matTooltip="How many people work in a company? &#13; examples: &#13; * 10 - 23 &#13;* 300+ &#13;* <20"
+            [matTooltipPosition]="'right'"
+            >help_outline</mat-icon>
+            <mat-error *ngIf="offerAddForm.get('companySize').hasError('required')">
+              Company size is required field.
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <input
+            matInput
+            maxlength="40"
+            #offerTitle
+            placeholder="Offer title *"
+            formControlName="offerTitle"
+          />
+          <mat-hint align="end">
+            {{ offerTitle.value?.length || 0 }}/40</mat-hint
+          >
+          <mat-error *ngIf="offerAddForm.get('offerTitle').hasError('required')">
+            Offer title is required field.
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <select matNativeControl formControlName="expLevel" placeholder="Choose an experience level">
+            <option value="default" disabled>Choose an experience level </option>
+            <option value="junior">Junior </option>
+            <option value="mid">Mid </option>
+            <option value="senior">Senior </option>
+          </select>
+          <mat-error *ngIf="offerAddForm.get('expLevel').hasError('required')">
+            Select an experience level.
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <select matNativeControl formControlName="empType" placeholder="Choose an employment type">
+            <option value="default" disabled>Choose an employment type</option>
+            <option value="B2B">B2B </option>
+            <option value="permanent">Permanent </option>
+            <option value="mandate contract">Mandate contract</option>
+          </select>
+          <mat-error *ngIf="offerAddForm.get('empType').hasError('required')">
+            Select an experience level.
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input" >
+          <mat-label>Monthly salary from (gross / invoice net)</mat-label>
+          <input
+            matInput
+            #minSal
+            type="number"
+            formControlName="minSal"
+            min="0"
+          />
+          <mat-icon
+            class="icon-help"
+            matSuffix
+            matTooltip="How much the candidate will earn monthly.&#13; With B2B &#13; It is the net amount without VAT. &#13; With Permanent or Mandate contract &#13;It is the gross amount. &#13; &#13; If you don't want to give a salary, choose 'undisclosed salary'"
+            [matTooltipPosition]="'right'"
+            >help_outline</mat-icon
+          >
+          <mat-error *ngIf="offerAddForm.get('minSal').hasError('min')">
+            It doesn't look like a monthly salary.
+            </mat-error>
+            <mat-hint [align]="'start'" *ngIf="isRequiredIfSalTouched('minSal')" [style.color]="'red'"> This field is required.</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <mat-label>Monthly salary to (gross / invoice net)</mat-label>
+          <input
+            matInput
+            #maxSal
+            type="number"
+           formControlName="maxSal"
+           [min]="minSalForMaxSal()"
+          />
+              <mat-hint [align]="'start'" *ngIf=" isInvalidSalary()" [style.color]="'red'">
+                Select at least one skill.
+                </mat-hint>
+                <mat-hint [align]="'start'" *ngIf="isRequiredIfSalTouched('maxSal')" [style.color]="'red'"> This field is required.</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <select matNativeControl formControlName="currency" placeholder="Choose currency">
+            <option value="default" disabled>Choose currency</option>
+            <option value="PLN">PLN</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <mat-hint *ngIf="isRequiredIfSalTouched()">Currency is required</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="input-field">
+        <mat-checkbox #checkBox formControlName="undisclosedSal" [disabled]="disableCheckbox()">Undisclosed salary </mat-checkbox>
+        <mat-icon
+          class="icon-help"
+          matTooltip="For job offer, which doesn't have defined salary"
+          [matTooltipPosition]="'right'"
+          >help_outline</mat-icon
+        >
+      </div>
+    </div>
+    <div class="offer-section">
+      <div class="offer-section-header">
+        Tech stack
+        <mat-icon
+          class="icon-help"
+          matTooltip="In this section you should put in tech stack and skill level required from the candidate.&#13;You can do it by selecting existing technology or writing a new one (25 characters limit)&#13; &#13;examples:&#13;* Java&#13; * Git&#13; * React"
+          [matTooltipPosition]="'right'"
+          >help_outline</mat-icon
+        >
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <mat-form-field class="offer-form-input" [ngClass]="{'warn': isInvalidSkillControl()}">
+            <input
+              type="text"
+              placeholder="Select technology or write new one *"
+              matInput
+              #skillInput
+              [matAutocomplete]="auto"
+              [formControl]="skillsControl"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addSkillToChosenSkills($event)"
+            />
+            <mat-hint [align]="'start'" *ngIf="isInvalidSkillControl()" [style.color]="'red'">
+            Select at least one skill.
+              </mat-hint>
+            <mat-hint align="end">
+             (max 6)</mat-hint
+            >
+
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredSkillOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+
+          </mat-form-field>
+        </div>
+        <div class="input-field">
+          <div class="skills-container">
+            <mat-chip-list #chipList aria-label="technology skills selection">
+              <mat-chip
+                *ngFor="let skill of chosenSkills"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="removeSkillFromChosenSkills(skill)"
+                class="skill-chip"
+              >
+                {{ skill }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-section">
+      <div class="offer-section-header">
+        Job description
+        <mat-icon
+          class="icon-help"
+          matTooltip="This section should contain: 'about us', 'your responsibilities', 'our requirements', 'nice to have', 'we offer'."
+          [matTooltipPosition]="'right'"
+          >help_outline</mat-icon
+        >
+      </div>
+      <div class="textarea-field">
+        <mat-form-field class="offer-form-input" appearance="outline">
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="15"
+                    formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="offer-section">
+      <div class="offer-section-header">
+        Choose your location
+  </div>
+      <div class="row">
+        <div class="input-field">
+          <mat-form-field class="offer-form-input">
+            <input
+              matInput
+              maxlength="20"
+              #companyCity
+              placeholder="Office city *"
+              (change)="onNavigate($event)"
+              formControlName="companyPlace"
+            />
+            <mat-icon
+              class="icon-help"
+              matSuffix
+              matTooltip="Please, write city where your office is."
+              [matTooltipPosition]="'right'"
+              >help_outline</mat-icon
+            >
+            <mat-hint align="end">
+              {{ companyCity.value?.length || 0 }}/20</mat-hint
+            >
+            <mat-error *ngIf="offerAddForm.get('companyPlace').hasError('required')">
+              City is required field.
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="input-field">
+          <mat-form-field class="offer-form-input">
+            <input
+              matInput
+              maxlength="30"
+              #companyStreet
+              placeholder="Office street / Business center *"
+              (change)="onNavigate($event)"
+              formControlName="companyStreet"
+            />
+            <mat-icon
+              class="icon-help"
+              matSuffix
+              matTooltip="Please, write your street number. You can also specify business center, which is recognisable for candidates. &#13;Thanks to this information we will be able to put the marker on the map more accurately. &#13;examples:&#13;* Grunwaldzka 34&#13;* Sky Tower &#13; * Olivia Business center"
+              [matTooltipPosition]="'right'"
+              >help_outline</mat-icon
+            >
+            <mat-hint align="end">
+              {{ companyStreet.value?.length || 0 }}/30</mat-hint
+            >
+            <mat-error *ngIf="offerAddForm.get('companyStreet').hasError('required')">
+              Street or place is required field.
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="input-field">
+          <mat-checkbox formControlName="remote">Fully remote</mat-checkbox>
+          <mat-icon
+            class="icon-help"
+            matTooltip="Is it possible to work fully remotely?"
+            [matTooltipPosition]="'right'"
+            >help_outline</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+    <div class="offer-map">
+      <app-leaflet-map></app-leaflet-map>
+    </div>
+    <div class="tech-selection">
+      <span class="label" [ngClass]="{'invalid': selectedTech === 'All' && clickedSubmitBtn}"
+        >Choose main technology
+        <mat-icon
+          class="icon-help"
+          matTooltip="Choose dominant technology for this offer. It will be used on the map and with filters. That's our unique feature."
+          [matTooltipPosition]="'right'"
+          >help_outline</mat-icon
+        >
+      </span>
+      <div class="technologies" [ngClass]="{'is-invalid': selectedTech === 'All' && clickedSubmitBtn}">
+        <div class="filters-tech">
+          <div class="tech" *ngFor="let tech of allTechnologies" (click)="onChooseTech(tech)">
+            <div
+              matRipple
+              class="filter-btn waves-effect"
+              [ngClass]="isActiveBtn(tech.name)"
+              [style.background]="tech.background"
+            >
+              <img [src]="tech.icon" alt="tech.name" />
+            </div>
+            <span>{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-section">
+      <div class="offer-section-header">How to apply</div>
+      <div class="row">
+      <div class="input-field">
+        <mat-form-field class="offer-form-input">
+          <input
+            matInput
+            placeholder="Enter apply email or paste link *"
+            formControlName="applyWay"
+          />
+          <mat-icon
+            class="icon-help"
+            matSuffix
+            matTooltip="It is very important, it specifies how candidate will apply for a job offer. &#13;&#13; With Email &#13;Every candidates application will be sent directly to this mail box via built-in form. &#13; &#13;With Link&#13; Candidate will be redirected to the provided link."
+            [matTooltipPosition]="'right'"
+            >help_outline</mat-icon
+          >
+          <mat-error *ngIf="offerAddForm.get('applyWay').hasError('required')">
+            Apply email or link is required field.
+              </mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+    </div>
+    <div class="apply-action">
+      <button class="submit-btn waves-effect btn-rounded" type="submit">
+        Post job offer
+      </button>
+      <span class="invalid-info" *ngIf="offerAddForm.invalid && clickedSubmitBtn">Some field are invalid</span>
+    </div>
+  </form>
+</div>
