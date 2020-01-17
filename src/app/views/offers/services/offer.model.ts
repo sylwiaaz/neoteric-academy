@@ -1,9 +1,9 @@
 export interface Offer {
-  _id: string;
+  _id?: string;
   jobTitle: string;
   tech: string;
   salary: string;
-  date: string;
+  date: string | Date;
   companyName: string;
   companyAddress: string;
   companyPlace: string;
@@ -16,4 +16,6 @@ export interface Offer {
   location: number[];
   remote: string;
   premium: boolean;
+  description: string;
+  applyWay: string;
 }
