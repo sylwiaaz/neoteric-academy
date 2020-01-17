@@ -22,6 +22,8 @@ export class AuthService {
               private snackBarService: SnackBarService) {
     if (this.cookieService.get('id_token')) {
       this.isAuthenticated = true;
+    } else {
+      localStorage.removeItem('currentUser');
     }
   }
 
@@ -59,6 +61,7 @@ export class AuthService {
         this.authStatusListener.next(true);
         this.router.navigate(['']);
         this.cookieService.set('id_token', value, 0.041667, '/');
+        localStorage.setItem('currentUser', this.currentUser);
       }, error => {
         if (error instanceof HttpErrorResponse) {
           const message = 'Invalid email address or password';
@@ -72,6 +75,7 @@ export class AuthService {
       .subscribe((response) => {
         this.isAuthenticated = false;
         this.cookieService.deleteAll('/');
+        localStorage.removeItem('currentUser');
         this.authStatusListener.next(false);
         this.snackBarService.showSuccess('You have logged out successfully.');
         this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
