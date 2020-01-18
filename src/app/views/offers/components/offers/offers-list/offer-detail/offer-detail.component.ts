@@ -61,7 +61,7 @@ export class OfferDetailComponent implements OnInit {
   }
 
   onNavigateBack() {
-    if ((((new Date().getTime()) - (new Date(this.offer.date).getTime())) / 31536000 ) < 0.001) {
+    if ((((new Date().getTime()) - (new Date(this.offer.date).getTime())) / 31536000 ) < 0.005) {
       this.onBackToList();
     } else {
     this.location.back();
