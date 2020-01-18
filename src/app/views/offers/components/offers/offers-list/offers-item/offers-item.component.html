@@ -1,5 +1,5 @@
 <a class="offer-item" [routerLink]="(offer.premium) ? [appRouterUrls.OFFER, index, {premium : true}] : [appRouterUrls.OFFER, index]">
- <div class="offer-border-left" [ngClass]="offer.tech"></div>
+ <div class="offer-border-left" [ngClass]="backgroundClass"></div>
   <div class="company-logo-container">
     <img
       class="company-logo"

@@ -1,3 +1,4 @@
+import { OfferService } from './../../../../services/offer-service.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { AppRouterUrls } from '../../../../../../app-routing.config';
 import { Offer } from '../../../../services/offer.model';
@@ -8,13 +9,15 @@ import { Offer } from '../../../../services/offer.model';
   styleUrls: ['./offers-item.component.scss']
 })
 export class OffersItemComponent implements OnInit {
-  appRouterUrls = AppRouterUrls;
-
   @Input() offer: Offer;
   @Input() index: string;
-  constructor() { }
+
+  backgroundClass: string;
+  appRouterUrls = AppRouterUrls;
+  constructor(private offerService: OfferService) { }
 
   ngOnInit() {
+    this.backgroundClass = this.offerService.classOfOffer(this.offer.tech);
   }
 
   timeSince(date) {
