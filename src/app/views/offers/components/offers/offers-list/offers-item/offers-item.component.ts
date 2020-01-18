@@ -17,4 +17,22 @@ export class OffersItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  timeSince(date) {
+    if (typeof date !== 'object') {
+      date = (new Date(date).getTime()) / 1000;
+    }
+    const seconds = Math.floor(((new Date().getTime() / 1000) - date));
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) { return interval + 'y ago'; }
+
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) { return interval + 'm ago'; }
+
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) { return interval + 'd ago'; }
+
+    if (interval < 1) { return 'new'; }
+  }
+
 }

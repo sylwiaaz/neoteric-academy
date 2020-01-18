@@ -13,7 +13,7 @@
       <span *ngIf="offer.premium" class="remote">Premium</span>
       <div class="right-content">
         <span class="salary">{{ offer.salary }}</span>
-        <span class="date" [ngClass]="{'new': offer.date === 'new'}">{{ offer.date }}</span>
+        <span class="date" [ngClass]="{'new': timeSince(offer.date) === 'new'}">{{ timeSince(offer.date) }}</span>
       </div>
     </div>
     <div class="second-line">
@@ -28,7 +28,9 @@
         >
       </div>
       <div class="tags">
-        <span class="tag" *ngFor="let tag of offer.skills">{{ tag }}</span>
+        <span class="tag">{{ offer.skills[0] }}</span>
+        <span class="tag" *ngIf="offer.skills[1]">{{ offer.skills[1] }}</span>
+        <span class="tag" *ngIf="offer.skills[2]">{{ offer.skills[2] }}</span>
       </div>
     </div>
   </div>
