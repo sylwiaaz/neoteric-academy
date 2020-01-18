@@ -247,7 +247,7 @@ export class OfferAddFormComponent implements OnInit {
     const maxSal = this.maxSalControl.value;
     const currency = this.currencyControl.value;
     if (minSal && maxSal && currency) {
-      return `${minSal} - ${maxSal} ${currency}`;
+      return `${(minSal).toLocaleString().replace(/,/g, ' ')} - ${(maxSal).toLocaleString().replace(/,/g, ' ', )} ${currency}`;
     } else {
       return 'undisclosed salary';
     }
