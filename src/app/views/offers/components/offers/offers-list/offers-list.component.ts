@@ -21,7 +21,11 @@ export class OffersListComponent implements OnInit, OnDestroy {
         if (offers.length === 0) {
           this.message = this.offerService.errorMessage;
         }
-        this.offers = offers;
+        this.offers = offers.sort((a, b) => {
+          const firstDate: any = new Date(a.date);
+          const secondDate: any = new Date(b.date);
+          return secondDate - firstDate;
+        });
       });
   }
 
