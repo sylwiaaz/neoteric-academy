@@ -3,6 +3,8 @@ export interface Offer {
   jobTitle: string;
   tech: string;
   salary: string;
+  minSal: number;
+  maxSal: number;
   date: string | Date;
   companyName: string;
   companyAddress: string;
@@ -18,4 +20,5 @@ export interface Offer {
   premium: boolean;
   description: string;
   applyWay: string;
+  authorId?: string;
 }
