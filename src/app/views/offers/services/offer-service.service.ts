@@ -1,3 +1,4 @@
+import { SnackBarService } from './../../../shared/services/snackBar.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Offer } from './offer.model';
@@ -13,7 +14,7 @@ export class OfferService {
   private mainPath = 'https://angularapp-backend.herokuapp.com/offers';
   errorMessage: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private snackBarService: SnackBarService) { }
 
   getOffersListener() {
     return this.offersSubject.asObservable();
@@ -50,7 +51,7 @@ export class OfferService {
           } else {
             if (place) {
               pathAPI = `${this.mainPath}/${place}`;
-            }  else {
+            } else {
               pathAPI = `${this.mainPath}`;
             }
           }
@@ -76,8 +77,24 @@ export class OfferService {
   postJobOffer(offerData: Offer) {
     return this.http.post<Offer>(this.mainPath, offerData)
       .subscribe(response => {
-        console.log(response);
-        this.router.navigate([`/offers/offer/${response._id}`]);
+          this.router.navigate([`/offers/offer/${response._id}`]);
+      }, error => {
+        if (error instanceof HttpErrorResponse) {
+          this.errorMessage = error.error.message;
+          this.snackBarService.showError('You are not authenticated. Please, login to post job offer.');
+        }
       });
+  }
+
+  classOfOffer(tech) {
+    if (tech === '.net') {
+      return 'dotNet';
+    } else if (tech === 'c++') {
+      return 'cplus';
+    } else if ( tech === 'ux/ui') {
+      return 'ux';
+    } else {
+      return tech;
+    }
   }
 }
