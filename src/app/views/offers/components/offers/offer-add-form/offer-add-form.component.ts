@@ -12,7 +12,6 @@ import {
 } from '@angular/material';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
-
 @Component({
   selector: 'app-offer-add-form',
   templateUrl: './offer-add-form.component.html',
@@ -22,6 +21,16 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
   ]
 })
 export class OfferAddFormComponent implements OnInit {
+  @ViewChild('skillInput', { static: false }) skillInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  provider = new OpenStreetMapProvider();
+
   skills: string[] = [
     'C',
     'Jetty',
@@ -65,36 +74,25 @@ export class OfferAddFormComponent implements OnInit {
     'Laravel'
   ];
   selectedTech: any = 'All';
-  logoPath;
   allTechnologies: any[];
-  companyPlace;
-  companyStreet;
-  companyAddress;
-  location;
+  companyPlace: string;
+  companyStreet: string;
+  companyAddress: string;
+  logoPath: string;
+  location: any[];
   clickedSubmitBtn = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   chosenSkills: string[] = [];
   skillsControl = new FormControl(null);
-  maxSal;
   filteredSkillOptions: Observable<string[]>;
-  provider = new OpenStreetMapProvider();
-
-  @ViewChild('skillInput', { static: false }) skillInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   offerAddForm: FormGroup;
+  minSalControl;
+  maxSalControl;
+  currencyControl;
 
-  constructor(
-    private mapService: MapService,
-    private filterService: FilterService,
-    private offerService: OfferService
-  ) {
+  constructor(private mapService: MapService,
+              private filterService: FilterService,
+              private offerService: OfferService) {
     this.filteredSkillOptions = this.skillsControl.valueChanges.pipe(
       startWith(''),
       map(value => (value ? this._filter(value) : this.skills.slice()))
@@ -107,45 +105,31 @@ export class OfferAddFormComponent implements OnInit {
       ...this.filterService.technologies,
       ...this.filterService.otherTechnologies
     ];
-
-    this.maxSal = new FormControl(null, [Validators.pattern('^[0-9]+\.$')]),
-
-
-      this.offerAddForm = new FormGroup({
-        companyName: new FormControl(null, Validators.required),
-        companySize: new FormControl(null, Validators.required),
-        offerTitle: new FormControl(null, Validators.required),
-        expLevel: new FormControl(null, Validators.required),
-        empType: new FormControl(null, Validators.required),
-        minSal: new FormControl(null, [Validators.min(200), Validators.pattern('^[0-9]+\.$')]),
-        maxSal: this.maxSal,
-        currency: new FormControl(null),
-        companyPlace: new FormControl(null, Validators.required),
-        companyStreet: new FormControl(null, Validators.required),
-        applyWay: new FormControl(null, Validators.required),
-        description: new FormControl(null, Validators.required),
-        remote: new FormControl(null),
-        undisclosedSal: new FormControl(null)
-      });
+    this.offerAddForm = new FormGroup({
+      companyName: new FormControl(null, Validators.required),
+      companySize: new FormControl(null, Validators.required),
+      offerTitle: new FormControl(null, Validators.required),
+      expLevel: new FormControl(null, Validators.required),
+      empType: new FormControl(null, Validators.required),
+      minSal: new FormControl(null, [
+        Validators.min(200),
+        Validators.pattern('^[0-9]+.$')]),
+      maxSal: new FormControl(null, [Validators.pattern('^[0-9]+.$')]),
+      currency: new FormControl(null),
+      companyPlace: new FormControl(null, Validators.required),
+      companyStreet: new FormControl(null, Validators.required),
+      applyWay: new FormControl(null, Validators.required),
+      description: new FormControl(null, Validators.required),
+      remote: new FormControl(false),
+      undisclosedSal: new FormControl(false)
+    });
+    this.minSalControl = this.offerAddForm.controls.minSal;
+    this.maxSalControl = this.offerAddForm.controls.maxSal;
+    this.currencyControl = this.offerAddForm.controls.currency;
   }
-
-  disableCheckbox() {
-    if (this.offerAddForm.get('minSal').value > 200) {
-      return true;
-    }
-    return false;
-  }
-
-  disableSalInput() {
-    if (this.offerAddForm.get('undisclosedSal').value === true) {
-      return true;
-    }
-    return false;
-  }
-
 
   minSalForMaxSal(): number {
-    return this.offerAddForm.get('minSal').value > 200 ? this.offerAddForm.get('minSal').value : 200;
+    return this.minSalControl.value > 200 ? this.minSalControl.value : 200;
   }
 
   addSkillToChosenSkills(event: MatChipInputEvent) {
@@ -155,7 +139,7 @@ export class OfferAddFormComponent implements OnInit {
 
       if ((value || '').trim()) {
         if (
-          this.chosenSkills.length < 6 &&
+          this.chosenSkills.length < 11 &&
           !this.chosenSkills.includes(value.trim())
         ) {
           this.chosenSkills.push(value.trim());
@@ -174,9 +158,8 @@ export class OfferAddFormComponent implements OnInit {
     this.skillsControl.setValue(null);
   }
 
-  removeSkillFromChosenSkills(skill) {
+  removeSkillFromChosenSkills(skill: string) {
     const index = this.chosenSkills.indexOf(skill);
-
     if (index >= 0) {
       this.chosenSkills.splice(index, 1);
     }
@@ -198,37 +181,46 @@ export class OfferAddFormComponent implements OnInit {
     }
   }
 
-  isRequiredIfSalTouched(inputName?) {
-    // console.log(event);
-    // if (inputId === "mat-input-6") {}
-    const maxSalControl = this.offerAddForm.get('maxSal');
-    const minSalControl = this.offerAddForm.get('minSal');
-    const currencyControl = this.offerAddForm.get('currency');
-
-    if (!currencyControl.value && (maxSalControl.touched || minSalControl.touched) && (maxSalControl.value || minSalControl.value)) {
-      if (inputName === 'minSal') {
-        return false;
+  isRequiredIfSalTouched(inputName?: string) {
+    this.disableCheckboxSal();
+    if (inputName === 'currency') {
+      if (!this.currencyControl.value && (this.minSalControl.touched && this.minSalControl.value || this.maxSalControl.touched &&
+        this.maxSalControl.value)) {
+        return true;
       }
+    } else if (inputName === 'maxSal') {
+      if (!this.maxSalControl.value && this.minSalControl.touched && this.minSalControl.value) {
+        return true;
+      }
+    } else if (inputName === 'minSal') {
+      if (!this.minSalControl.value && this.maxSalControl.touched && this.maxSalControl.value) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  disableCheckboxSal() {
+    if (this.maxSalControl.value || this.minSalControl.value) {
+      this.offerAddForm.get('undisclosedSal').disable();
+    } else {
+      this.offerAddForm.get('undisclosedSal').enable();
+    }
+  }
+
+  isInvalidSalaryValue() {
+    if (this.maxSalControl.value <= this.minSalControl.value && this.maxSalControl.touched &&
+      this.minSalControl.value > 0 && this.maxSalControl.value) {
       return true;
     }
     return false;
   }
 
-  isInvalidSalary() {
-    const maxSalControl = this.offerAddForm.get('maxSal');
-    if (maxSalControl.value <= this.offerAddForm.value.minSal && maxSalControl.touched) {
-      return true;
-    }
-    return false;
-  }
-
-  isActiveBtn(tech) {
+  isActiveBtn(tech: string) {
     if (tech.toLowerCase() === this.selectedTech.toLowerCase()) {
       return 'active';
-    } else if (
-      tech.toLowerCase() !== this.selectedTech.toLowerCase() &&
-      this.selectedTech !== 'All'
-    ) {
+    } else if (tech.toLowerCase() !== this.selectedTech.toLowerCase() && this.selectedTech !== 'All') {
       return 'inactive';
     }
   }
@@ -241,31 +233,37 @@ export class OfferAddFormComponent implements OnInit {
       this.companyStreet = event.target.value;
     }
     if (this.companyStreet && this.companyPlace) {
-      this.companyAddress = `${this.companyStreet}; ${this.companyPlace}`;
+      this.companyAddress = `${this.companyStreet}, ${this.companyPlace}`;
       this.provider.search({ query: this.companyAddress }).then(result => {
-        this.location = [result[0].y, result[0].x];
+        this.location = [Number(result[0].y), Number(result[0].x)];
         this.mapService.zoomToPlace(this.location);
         this.mapService.makeMarker(this.location);
       });
     }
   }
 
-setSalary() {
-  const minSal = this.offerAddForm.value.minSal;
-  const maxSal = this.offerAddForm.value.maxSal;
-  const currency = this.offerAddForm.value.currency;
-  console.log(currency);
-  if (minSal && maxSal && currency) {
-    return `${minSal} - ${maxSal} ${currency}`;
-  }  else {
-    return 'undisclosed salary';
+  setSalary() {
+    const minSal = this.minSalControl.value;
+    const maxSal = this.maxSalControl.value;
+    const currency = this.currencyControl.value;
+    if (minSal && maxSal && currency) {
+      return `${minSal} - ${maxSal} ${currency}`;
+    } else {
+      return 'undisclosed salary';
+    }
   }
-}
+
+  isTricity(place) {
+    if (place === 'Gdańsk' || place === 'Gdynia' || place === 'Sopot') {
+      return 'Trójmiasto';
+    } else {
+      return place;
+    }
+  }
 
   onPostOffer() {
     this.clickedSubmitBtn = true;
-    if (this.offerAddForm.valid) {
-
+    if (this.offerAddForm.valid && this.selectedTech !== 'All' && this.chosenSkills.length !== 0) {
       const offerJob = {
         skills: this.chosenSkills,
         techStack: this.chosenSkills,
@@ -273,12 +271,12 @@ setSalary() {
         jobTitle: this.offerAddForm.value.offerTitle,
         tech: this.selectedTech.toLowerCase(),
         salary: this.setSalary(),
-        minSal: this.offerAddForm.value.minSal ? this.offerAddForm.value.minSal : 0,
-        maxSal: this.offerAddForm.value.maxSal ? this.offerAddForm.value.maxSal : 51000,
+        minSal: this.minSalControl.value ? this.minSalControl.value : 0,
+        maxSal: this.maxSalControl.value ? this.maxSalControl.value : 51000,
         date: new Date(),
         companyName: this.offerAddForm.value.companyName,
         companyAddress: this.companyAddress,
-        companyPlace: this.companyPlace,
+        companyPlace: this.isTricity(this.companyPlace),
         logoPath: this.logoPath,
         companySize: this.offerAddForm.value.companySize,
         employmentType: this.offerAddForm.value.empType,
@@ -288,10 +286,8 @@ setSalary() {
         applyWay: this.offerAddForm.value.applyWay,
         description: this.offerAddForm.value.description
       };
-      console.log(offerJob);
       this.offerService.postJobOffer(offerJob);
     }
-    console.log(this.offerAddForm);
   }
 
   onChooseTech(tech) {
