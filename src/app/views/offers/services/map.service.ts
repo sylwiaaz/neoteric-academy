@@ -40,7 +40,7 @@ export class MapService implements OnDestroy {
             iconUrl: logoPath,
             iconSize: [35, 35],
             iconAnchor: [20, 20],
-            className: offer.tech
+            className: this.offerService.classOfOffer(offer.tech)
           });
           const marker = L.marker([lat, lng], { icon: customIcon, autoPan: true });
           marker.bindTooltip(this.makeTooltip(offer), { direction: 'top' });
