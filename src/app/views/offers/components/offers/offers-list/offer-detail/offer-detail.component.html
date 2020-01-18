@@ -8,7 +8,7 @@
   </mat-progress-spinner>
   <div class="offer-detail" *ngIf="offer && !isLoading">
     <div class="offer-header">
-      <div class="background" [ngClass]="offer.tech">
+      <div class="background" [ngClass]="backgroundClass">
         <button class="back waves-effect" (click)="onNavigateBack()">
           <mat-icon>arrow_back</mat-icon>
         </button>
@@ -51,7 +51,7 @@
         </div>
         <div class="tile type-emp">
           <mat-icon>description</mat-icon>
-          <div class="value">{{ offer.employmentType | titlecase }}</div>
+          <div class="value">{{ offer.employmentType }}</div>
           <div class="title">EMP. type</div>
         </div>
         <div class="tile exp-level">
@@ -61,7 +61,7 @@
         </div>
         <div class="tile date">
           <mat-icon>timelapse</mat-icon>
-          <div class="value">{{ offer.date }}</div>
+          <div class="value">{{ timeSince(offer.date) }}</div>
           <div class="title">Added</div>
         </div>
       </div>
@@ -71,7 +71,9 @@
         <div class="section-title">
           Tech stack
         </div>
-        <div class="section-content"></div>
+        <div class="section-content">
+          <div class="btn-rounded waves-effect skill-btn" [ngClass]="offer.tech" *ngFor="let skill of offer.skills"> {{ skill }}</div>
+        </div>
       </div>
       <div class="offer-section description">
         <div class="section-title">
@@ -79,6 +81,7 @@
         </div>
         <div class="section-content">
           <div class="main-description">
+            <div *ngIf="!offer.description">
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat
               a, officiis veniam qui exercitationem cumque impedit quia odit
@@ -109,6 +112,8 @@
             </p>
             Nobis quasi voluptas mollitia.
           </div>
+          <div class="offer-description" *ngIf="offer.description"> {{ offer.description }}</div>
+          </div>
           <div class="clause">
             <div class="moreClauseInformation">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
@@ -135,7 +140,7 @@
           Apply for the job
         </div>
         <div class="section-content">
-          <form [formGroup]="applyCVForm" (ngSubmit)="onApply()">
+          <form [formGroup]="applyCVForm" (ngSubmit)="onApply()" class="offer-form">
             <div class="row-inputs">
               <div class="form-input">
                 <mat-form-field appearance="outline">
