@@ -1,3 +1,4 @@
+import { MapService } from './map.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { AppRouterUrls } from '../../../app-routing.config';
@@ -159,7 +160,7 @@ export class FilterService {
   selectedMinSal = '0k';
   selectedMaxSal = '51k';
 
-  constructor(private router: Router, private offerService: OfferService) {
+  constructor(private router: Router, private offerService: OfferService, private mapService: MapService) {
     this.router.events.subscribe(events => {
       if (events instanceof NavigationEnd) {
         const urlParams = decodeURIComponent(this.router.url).split('/');
@@ -182,6 +183,7 @@ export class FilterService {
   }
 
   onNavigateByFilter() {
+    this.mapService.zoomOut();
     if (this.router.url.includes('offers')) {
       if (this.selectedMaxSal === '51k') {
         if (this.selectedMinSal === '0k') {
