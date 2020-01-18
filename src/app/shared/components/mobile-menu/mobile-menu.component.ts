@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppRouterUrls } from '../../../app-routing.config';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -22,7 +23,8 @@ export class MobileMenuComponent implements OnInit, OnDestroy {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   changeBodyScrollBar(drawer) {
@@ -38,6 +40,12 @@ export class MobileMenuComponent implements OnInit, OnDestroy {
       }
     );
 
+  }
+
+  onNavigateToDefaultUrl() {
+    this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/offers']);
+    });
   }
 
   onLogOut() {

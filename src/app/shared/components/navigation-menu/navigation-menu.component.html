@@ -28,7 +28,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <a class="header-logo" [routerLink]="appRouterUrls.DEFAULT">justjoin.it</a>
+      <a class="header-logo" (click)="onNavigateToDefaultUrl()">justjoin.it</a>
       <mat-nav-list class="menu-links">
         <a class="list-item" [routerLink]="appRouterUrls.DEFAULT" [routerLinkActive]="'active'">
           <mat-icon>work_outline</mat-icon>

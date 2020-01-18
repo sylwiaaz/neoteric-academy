@@ -74,7 +74,7 @@
   <mat-sidenav-content>
     <div class="header-container">
       <div class="header-mobile">
-        <a class="header-logo" [routerLink]="appRouterUrls.DEFAULT">justjoin.it</a>
+        <a class="header-logo" (click)="onNavigateToDefaultUrl()">justjoin.it</a>
         <button class="btn-toggle-nav" type="button" aria-label="Toggle sidenav" mat-icon-button
           (click)="drawer.toggle(); changeBodyScrollBar(drawer)">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>

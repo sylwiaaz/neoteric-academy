@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppRouterUrls } from '../../../app-routing.config';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -20,7 +21,9 @@ export class NavigationMenuComponent implements OnInit, OnDestroy {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {  }
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router) {  }
+
+
 
   ngOnInit() {
     this.isLogged = this.authService.getIsAuth();
@@ -30,6 +33,13 @@ export class NavigationMenuComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  onNavigateToDefaultUrl() {
+    this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/offers']);
+    });
+  }
+
   onLogOut() {
     this.authService.logout();
   }
