@@ -229,16 +229,42 @@
   .section-content {
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    .skill-btn {
+      padding: 0 35px;
+      color: white;
+      margin: 15px;
+      box-shadow: none;
+      text-transform: none;
+      font-weight: 600;
+      font-size: 14px;
+      height: 42px;
+      cursor: default;
+      line-height: 42px;
+      border: none;
+    }
   }
 
   .main-description {
     font-size: 14px;
   }
+
+  .offer-description {
+    white-space: pre-line;
+  }
+
   .clause {
     margin-top: 25px;
     color: #99a1ab;
     font-size: 11px;
   }
+}
+
+.offer-form {
+  width: 100%;
 }
 
 .row-inputs {
@@ -452,6 +478,10 @@ mat-form-field.mat-form-field {
       left: auto;
       right: auto;
     }
+  }
+
+  .consent {
+    margin-top: 15px;
   }
 }
 
