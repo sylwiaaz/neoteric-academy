@@ -21,7 +21,7 @@ export class OfferDetailComponent implements OnInit {
   errorMessage: string;
   isLoading = false;
   isInvalidIdOffer = false;
-
+  backgroundClass;
   constructor(private offerService: OfferService,
               private router: Router,
               private route: ActivatedRoute,
@@ -41,6 +41,7 @@ export class OfferDetailComponent implements OnInit {
         this.isLoading = false;
         this.offer = offer;
         this.offerService.offersSubject.next([this.offer]);
+        this.backgroundClass = this.offerService.classOfOffer(this.offer.tech);
         this.mapService.zoomToPlace(this.offer.location);
       }, error => {
         this.isLoading = false;
@@ -60,7 +61,11 @@ export class OfferDetailComponent implements OnInit {
   }
 
   onNavigateBack() {
+    if ((((new Date().getTime()) - (new Date(this.offer.date).getTime())) / 31536000 ) < 0.001) {
+      this.onBackToList();
+    } else {
     this.location.back();
+    }
     this.mapService.zoomOut();
   }
 
@@ -80,5 +85,23 @@ export class OfferDetailComponent implements OnInit {
     this.router.navigateByUrl('/brands', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/offers']);
     });
+  }
+
+  timeSince(date) {
+    if (typeof date !== 'object') {
+      date = (new Date(date).getTime()) / 1000;
+    }
+    const seconds = Math.floor(((new Date().getTime() / 1000) - date));
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) { return interval + 'y ago'; }
+
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) { return interval + 'm ago'; }
+
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) { return interval + 'd ago'; }
+
+    if (interval < 1) { return 'new'; }
   }
 }
